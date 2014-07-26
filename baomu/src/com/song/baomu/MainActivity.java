@@ -9,6 +9,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
 import com.song.baomu.MyBaomuService.MyServiceBinder;
+import com.song.utils.GuideHelper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -70,6 +71,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+        GuideHelper guideHelper = new GuideHelper(this);
+        guideHelper.openGuide();
 
 		main_edit_phone = (EditText) findViewById(R.id.main_edit_phone);
 
@@ -326,7 +330,6 @@ public class MainActivity extends Activity {
 
 	protected void onDestroy() {
 		super.onDestroy();
-		unbindService(conn);
 
 	}
 
