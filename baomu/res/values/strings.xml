@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BaoMu</string>
+    <string name="biaoti">安全小保姆</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_phone">手机号</string>
+    <string name="main_set_phone">设置</string>
+    <string name="main_dingdian1">定点一</string>
+    <string name="main_dingdian2">定点二</string>
+    <string name="main_opne_service">开启服务</string>
+    <string name="main_close_service">关闭服务</string>
+    <string name="main_one_set">设置向导</string>
+    <string name="main_help">用户帮助</string>
+    <string name="map_view_textview">设置定点</string>
+    <string name="map_view_queding">确定返回</string>
+    <string name="map_view_qingchu">清除数据</string>
+    <string name="main_set_dingdian">设置定点数据</string>
+
+</resources>
