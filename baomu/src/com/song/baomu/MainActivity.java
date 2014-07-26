@@ -12,7 +12,6 @@ import com.song.baomu.MyBaomuService.MyServiceBinder;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,10 +39,10 @@ public class MainActivity extends Activity {
 	private String sharedname_phone = "myconfig_phone";
 
 	private EditText main_edit_phone;
-	private EditText main_edit_dingdian1;
 
 	private Button main_set_phone;
 	private Button main_set_dingdian1;
+	private Button main_set_jingdu;
 
 	private Button main_open_service;
 	private Button main_close_service;
@@ -53,16 +52,17 @@ public class MainActivity extends Activity {
 	private ListView main_listview;
 
 	String edit_phone = "";
-	
-	//用于接收服务返回的binder
+
+	// 用于接收服务返回的binder
 	private MyServiceBinder mybinder = null;
-	//与服务的链接
+	// 与服务的链接
 	private MyServiceConnection conn = new MyServiceConnection();
 
-
 	private LocationClient mLocationClient;
-	
+
 	private EditText xiejingdu;
+
+	AlertDialog.Builder builder;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +83,9 @@ public class MainActivity extends Activity {
 		main_one_set.setOnClickListener(mylostener);
 		main_help = (Button) findViewById(R.id.main_help);
 		main_help.setOnClickListener(mylostener);
-		
-		xiejingdu = new EditText(MainActivity.this);
+
+		main_set_jingdu = (Button) findViewById(R.id.main_set_jingdu);
+		main_set_jingdu.setOnClickListener(mylostener);
 
 		main_listview = (ListView) findViewById(R.id.main_list_view);
 
@@ -102,7 +103,7 @@ public class MainActivity extends Activity {
 					int position, long id) {
 				// Toast.makeText(getApplicationContext(), position+"&&"+id,
 				// 1).show();
-				//点击item则获取经纬度打开百度地图
+				// 点击item则获取经纬度打开百度地图
 
 			}
 
@@ -158,41 +159,111 @@ public class MainActivity extends Activity {
 				startActivityForResult(intent, 0);
 
 				break;
+
+			case R.id.main_set_jingdu:// 设置精度
+
+				builder = new AlertDialog.Builder(MainActivity.this);
+				xiejingdu = new EditText(MainActivity.this);
+				builder.setTitle("请输入你想要设置的精度（米）");
+				builder.setIcon(android.R.drawable.ic_dialog_info);
+				builder.setView(xiejingdu);
+				builder.setPositiveButton("确定",
+						new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog,
+									int which) {
+								String jingdutext = xiejingdu.getText()
+										.toString().trim();
+								if (jingdutext.length() != 0
+										&& jingdutext.matches("^[0-9]*$")) {
+									System.out.println(jingdutext);
+									SharedPreferences mysharedxie_jingdu = getSharedPreferences(
+											sharedname_jingdu,
+											Context.MODE_WORLD_WRITEABLE);
+									Editor editor = mysharedxie_jingdu.edit();
+									editor.putInt("jingdu",
+											Integer.parseInt(jingdutext));
+									editor.commit();
+								}
+								dialog.dismiss();
+								dialog.cancel();
+							}
+
+						});
+				builder.setNegativeButton("取消", null);
+
+				builder.create();
+
+				builder.show();
+
+				// AlertDialog dialog = builder.show();
+
+				// new AlertDialog.Builder(MainActivity.this)
+				// .setTitle("请输入你想要设置的精度（米）必须是数字，默认为50米")
+				// .setIcon(android.R.drawable.ic_dialog_info)
+				// .setView(xiejingdu)
+				// .setPositiveButton("确定",new
+				// DialogInterface.OnClickListener(){
+				//
+				// public void onClick(DialogInterface dialog, int which) {
+				// String jingdutext = xiejingdu.getText().toString().trim();
+				// if(jingdutext.length()!=0 && jingdutext.matches("^[0-9]*$")){
+				// System.out.println(jingdutext);
+				// SharedPreferences mysharedxie_jingdu =
+				// getSharedPreferences(sharedname_jingdu,
+				// Context.MODE_WORLD_WRITEABLE);
+				// Editor editor = mysharedxie_jingdu.edit();
+				// editor.putInt("jingdu", Integer.parseInt(jingdutext));
+				// editor.commit();
+				// }
+				//
+				//
+				// }
+				//
+				// })
+				// .setNegativeButton("取消", null)
+				// .show();
+				//
+				//
+
+				break;
 			case R.id.main_open_service:
-				
-				//先判断经度设置了没？没有着弹出对话框设置，默认50米
-				SharedPreferences myshared_jingdu = getSharedPreferences(sharedname_jingdu,
-						Context.MODE_WORLD_WRITEABLE);
-				int jingdu = myshared_jingdu.getInt("jingdu", 0);
-				
-				SharedPreferences myshared = getSharedPreferences(sharedname_phone,
-						Context.MODE_WORLD_READABLE);
+
+				// 读取精度
+				SharedPreferences mysharedxie_jingdu = getSharedPreferences(
+						sharedname_jingdu, Context.MODE_WORLD_READABLE);
+				int jingdu1 = mysharedxie_jingdu.getInt("jingdu", 0);
+
+				// 先判断手机号设置了没
+				SharedPreferences myshared = getSharedPreferences(
+						sharedname_phone, Context.MODE_WORLD_READABLE);
 				String phone = myshared.getString("phone", "");
-				
-				if(phone.equals("")||phone.length()==0){
-					
+
+				if (phone.equals("") || phone.length() == 0) {
+
 					new AlertDialog.Builder(MainActivity.this)
-					.setTitle("你还没有设置报警手机号，请返回设置")
-					.setIcon(android.R.drawable.ic_dialog_info)
-					.setPositiveButton("确定",null)
-					.show();	
-					
-				}else{
-					//绑定服务
-					Intent intentservice = new Intent(MainActivity.this,MyBaomuService.class);
+							.setTitle("你还没有设置报警手机号，请返回设置")
+							.setIcon(android.R.drawable.ic_dialog_info)
+							.setPositiveButton("确定", null).show();
+
+				} else {
+					// 绑定服务
+					Intent intentservice = new Intent(MainActivity.this,
+							MyBaomuService.class);
 					bindService(intentservice, conn, BIND_AUTO_CREATE);
+					Toast.makeText(MainActivity.this,
+							"您设置的报警电话为 " + phone + " 精度为 " + jingdu1, 1).show();
+
 				}
-				
-				
+
 				break;
 			case R.id.main_close_service:
-				
-				//解除服务的绑定
+
+				// 解除服务的绑定
 				unbindService(conn);
-				Toast.makeText(MainActivity.this, "服务已解除。", 1)
-				.show();
+				Toast.makeText(MainActivity.this, "服务已解除。", 1).show();
 				break;
-				
+
 			case R.id.main_one_set:
 
 				break;
@@ -243,13 +314,11 @@ public class MainActivity extends Activity {
 		return listdata;
 
 	}
-	
-	
-	
+
 	/**
 	 * 绑定服务的链接类
 	 */
-	private class MyServiceConnection implements ServiceConnection{
+	private class MyServiceConnection implements ServiceConnection {
 
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
@@ -260,13 +329,10 @@ public class MainActivity extends Activity {
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
 			// TODO Auto-generated method stub
-			
-		}
-		
-	}
-	
-	
 
+		}
+
+	}
 
 	protected void onDestroy() {
 		super.onDestroy();
@@ -277,13 +343,13 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		list = getDate();
 		if (list.size() != 0) {
-			main_listview.setAdapter(new SimpleAdapter(
-					getApplicationContext(), list,
-					R.layout.my_listview_layout, new String[] { "title" },
+			main_listview.setAdapter(new SimpleAdapter(getApplicationContext(),
+					list, R.layout.my_listview_layout,
+					new String[] { "title" },
 					new int[] { R.id.my_listview_title }));
 		}
 	}

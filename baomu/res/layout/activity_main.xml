@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/main_phone"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
 
             <EditText
                 android:id="@+id/main_edit_phone"
@@ -44,7 +44,8 @@
                 android:id="@+id/main_set_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/main_set_phone" />
+                android:text="@string/main_set_phone"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,18 +61,36 @@
                 android:layout_height="150dp" >
             </ListView>
 
-            <Button
-                android:id="@+id/main_set_dingdian1"
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/main_set_dingdian" />
+                android:layout_below="@id/layout_dingdian1"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/main_set_dingdian1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38sp"
+                    android:layout_weight="1"
+                    android:text="@string/main_set_dingdian"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/main_set_jingdu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38sp"
+                    android:layout_weight="1"
+                    android:text="@string/main_set_jingdu"
+                    android:textSize="15sp" />
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/phone_dingdian" >
+        android:layout_below="@id/phone_dingdian"
+        android:paddingTop="15sp" >
 
         <LinearLayout
             android:id="@+id/main_service"
@@ -105,14 +124,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/main_one_set" />
+                android:text="@string/main_one_set"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/main_help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/main_help" />
+                android:text="@string/main_help"
+                android:textSize="15sp" />
         </LinearLayout>
     </RelativeLayout>
 
