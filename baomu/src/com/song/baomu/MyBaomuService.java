@@ -75,7 +75,7 @@ public class MyBaomuService extends Service {
 
 				while (xianchengflag) {
 					try {
-						Thread.sleep(5000);
+						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -142,11 +142,11 @@ public class MyBaomuService extends Service {
 						String content = "你的监管的对象现在已经超出所设定的范围，点击下面链接可以查看他当前的位置 "
 								+ shareurl;
 						chaochuxianchengflag = false;
-//						SmsManager smsmanger = SmsManager.getDefault();
-//						List<String> texts = smsmanger.divideMessage(content);
-//						for(String text:texts){
-//							smsmanger.sendTextMessage(phone, null, text, null, null);
-//						}
+						SmsManager smsmanger = SmsManager.getDefault();
+						List<String> texts = smsmanger.divideMessage(content);
+						for(String text:texts){
+							smsmanger.sendTextMessage(phone, null, text, null, null);
+						}
 						
 						System.out.println(content+chaochuxianchengflag);
 
@@ -256,13 +256,13 @@ public class MyBaomuService extends Service {
 	private class ShareUrlListener implements OnGetShareUrlResultListener {
 
 		@Override
-		public void onGetLocationShareUrlResult(ShareUrlResult arg0) {
-
+		public void onGetLocationShareUrlResult(ShareUrlResult result) {
+			shareurl = result.getUrl();
 		}
 
 		@Override
 		public void onGetPoiDetailShareUrlResult(ShareUrlResult result) {
-			shareurl = result.getUrl();
+			
 		}
 
 	}
@@ -272,7 +272,6 @@ public class MyBaomuService extends Service {
 		// TODO Auto-generated method stub
 		xianchengflag = false;
 		chaochuxianchengflag = false;
-		mShareUrlSearch.destroy();
 		super.onDestroy();
 	}
 
