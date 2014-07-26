@@ -52,6 +52,8 @@ public class MainActivity extends Activity {
 	private ListView main_listview;
 
 	String edit_phone = "";
+	
+	int jingdu = 0;
 
 	// 用于接收服务返回的binder
 	private MyServiceBinder mybinder = null;
@@ -94,6 +96,9 @@ public class MainActivity extends Activity {
 		InitLocation();
 		// 发起定位
 		mLocationClient.start();
+		
+		
+	
 
 		// listview 点击事件
 		main_listview.setOnItemClickListener(new OnItemClickListener() {
@@ -104,6 +109,11 @@ public class MainActivity extends Activity {
 				// Toast.makeText(getApplicationContext(), position+"&&"+id,
 				// 1).show();
 				// 点击item则获取经纬度打开百度地图
+				
+				
+				
+				
+				
 
 			}
 
@@ -161,7 +171,7 @@ public class MainActivity extends Activity {
 				break;
 
 			case R.id.main_set_jingdu:// 设置精度
-
+				
 				builder = new AlertDialog.Builder(MainActivity.this);
 				xiejingdu = new EditText(MainActivity.this);
 				builder.setTitle("请输入你想要设置的精度（米）");
@@ -184,9 +194,14 @@ public class MainActivity extends Activity {
 									editor.putInt("jingdu",
 											Integer.parseInt(jingdutext));
 									editor.commit();
+									
+									jingdu = mysharedxie_jingdu.getInt("jingdu", 0);
 								}
 								dialog.dismiss();
 								dialog.cancel();
+								Toast.makeText(MainActivity.this,
+										"您已成功将报警精度范围设置为 " + jingdu, 1)
+										.show();
 							}
 
 						});
@@ -196,35 +211,6 @@ public class MainActivity extends Activity {
 
 				builder.show();
 
-				// AlertDialog dialog = builder.show();
-
-				// new AlertDialog.Builder(MainActivity.this)
-				// .setTitle("请输入你想要设置的精度（米）必须是数字，默认为50米")
-				// .setIcon(android.R.drawable.ic_dialog_info)
-				// .setView(xiejingdu)
-				// .setPositiveButton("确定",new
-				// DialogInterface.OnClickListener(){
-				//
-				// public void onClick(DialogInterface dialog, int which) {
-				// String jingdutext = xiejingdu.getText().toString().trim();
-				// if(jingdutext.length()!=0 && jingdutext.matches("^[0-9]*$")){
-				// System.out.println(jingdutext);
-				// SharedPreferences mysharedxie_jingdu =
-				// getSharedPreferences(sharedname_jingdu,
-				// Context.MODE_WORLD_WRITEABLE);
-				// Editor editor = mysharedxie_jingdu.edit();
-				// editor.putInt("jingdu", Integer.parseInt(jingdutext));
-				// editor.commit();
-				// }
-				//
-				//
-				// }
-				//
-				// })
-				// .setNegativeButton("取消", null)
-				// .show();
-				//
-				//
 
 				break;
 			case R.id.main_open_service:
@@ -234,6 +220,10 @@ public class MainActivity extends Activity {
 						sharedname_jingdu, Context.MODE_WORLD_READABLE);
 				int jingdu1 = mysharedxie_jingdu.getInt("jingdu", 0);
 
+				if(jingdu1==0){
+					jingdu1=50;
+				}
+				
 				// 先判断手机号设置了没
 				SharedPreferences myshared = getSharedPreferences(
 						sharedname_phone, Context.MODE_WORLD_READABLE);
@@ -261,7 +251,7 @@ public class MainActivity extends Activity {
 
 				// 解除服务的绑定
 				unbindService(conn);
-				Toast.makeText(MainActivity.this, "服务已解除。", 1).show();
+				Toast.makeText(MainActivity.this, "服务已关闭。", 1).show();
 				break;
 
 			case R.id.main_one_set:
