@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
 	private ListView main_listview;
 
 	String edit_phone = "";
-	
+
 	int jingdu = 0;
 
 	// 用于接收服务返回的binder
@@ -71,9 +71,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-        GuideHelper guideHelper = new GuideHelper(this);
-        guideHelper.openGuide();
+
+		GuideHelper guideHelper = new GuideHelper(this);
+		guideHelper.openGuide();
 
 		main_edit_phone = (EditText) findViewById(R.id.main_edit_phone);
 
@@ -100,9 +100,6 @@ public class MainActivity extends Activity {
 		InitLocation();
 		// 发起定位
 		mLocationClient.start();
-		
-		
-	
 
 		// listview 点击事件
 		main_listview.setOnItemClickListener(new OnItemClickListener() {
@@ -113,11 +110,6 @@ public class MainActivity extends Activity {
 				// Toast.makeText(getApplicationContext(), position+"&&"+id,
 				// 1).show();
 				// 点击item则获取经纬度打开百度地图
-				
-				
-				
-				
-				
 
 			}
 
@@ -171,11 +163,12 @@ public class MainActivity extends Activity {
 			case R.id.main_set_dingdian1:
 				Intent intent = new Intent(MainActivity.this, MapActivity.class);
 				startActivityForResult(intent, 0);
-
+				Toast.makeText(MainActivity.this,
+						"设置定点时，需要在地图中长按，然后会有提示，定点可以设置多个。", 1).show();
 				break;
 
 			case R.id.main_set_jingdu:// 设置精度
-				
+
 				builder = new AlertDialog.Builder(MainActivity.this);
 				xiejingdu = new EditText(MainActivity.this);
 				builder.setTitle("请输入你想要设置的精度（米）");
@@ -198,14 +191,14 @@ public class MainActivity extends Activity {
 									editor.putInt("jingdu",
 											Integer.parseInt(jingdutext));
 									editor.commit();
-									
-									jingdu = mysharedxie_jingdu.getInt("jingdu", 0);
+
+									jingdu = mysharedxie_jingdu.getInt(
+											"jingdu", 0);
 								}
 								dialog.dismiss();
 								dialog.cancel();
 								Toast.makeText(MainActivity.this,
-										"您已成功将报警精度范围设置为 " + jingdu, 1)
-										.show();
+										"您已成功将报警精度范围设置为 " + jingdu, 1).show();
 							}
 
 						});
@@ -215,7 +208,6 @@ public class MainActivity extends Activity {
 
 				builder.show();
 
-
 				break;
 			case R.id.main_open_service:
 
@@ -224,10 +216,10 @@ public class MainActivity extends Activity {
 						sharedname_jingdu, Context.MODE_WORLD_READABLE);
 				int jingdu1 = mysharedxie_jingdu.getInt("jingdu", 0);
 
-				if(jingdu1==0){
-					jingdu1=50;
+				if (jingdu1 == 0) {
+					jingdu1 = 50;
 				}
-				
+
 				// 先判断手机号设置了没
 				SharedPreferences myshared = getSharedPreferences(
 						sharedname_phone, Context.MODE_WORLD_READABLE);
