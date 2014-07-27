@@ -141,16 +141,13 @@ public class MyBaomuService extends Service {
 						// 报警处理
 						String content = "你的监管的对象现在已经超出所设定的范围，点击下面链接可以查看他当前的位置 "
 								+ shareurl;
-						chaochuxianchengflag = false;
+					
 						SmsManager smsmanger = SmsManager.getDefault();
 						List<String> texts = smsmanger.divideMessage(content);
 						for(String text:texts){
 							smsmanger.sendTextMessage(phone, null, text, null, null);
 						}
-						//测试
-						Toast.makeText(MyBaomuService.this,
-								"短信已发送成功# " + phone+" #content", 1)
-								.show();
+						chaochuxianchengflag = false;
 						System.out.println(content+chaochuxianchengflag);
 
 					}
@@ -159,6 +156,7 @@ public class MyBaomuService extends Service {
 			}
 
 		}).start();
+		
 
 		return mybinder;
 	}
