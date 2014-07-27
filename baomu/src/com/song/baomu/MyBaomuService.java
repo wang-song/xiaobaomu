@@ -147,7 +147,10 @@ public class MyBaomuService extends Service {
 						for(String text:texts){
 							smsmanger.sendTextMessage(phone, null, text, null, null);
 						}
-						
+						//测试
+						Toast.makeText(MyBaomuService.this,
+								"短信已发送成功# " + phone+" #content", 1)
+								.show();
 						System.out.println(content+chaochuxianchengflag);
 
 					}
