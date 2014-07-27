@@ -12,6 +12,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.model.LatLng;
 
 import android.app.Application;
 
@@ -21,15 +22,25 @@ public class MyApplication extends Application {
 	public GeofenceClient mGeofenceClient;
 	public MyLocationListener mMyLocationListener;
 	
+	private int mcode ;
+	private double mlatitude;
+	private double mlongitude;
+	
 	//定位间隔时间
-	int span = 5000;
+	int span = 7000;
 	
 	
 	private Map<Object,Object> listaddress = new HashMap<Object,Object>();
 	
 	
+	//返回定位的相信信息
 	public Map<Object,Object> getList(){
 		return listaddress;
+	}
+	
+	//返回定位的经纬度坐标
+	public LatLng getLocationProvider(){
+		return new LatLng(mlatitude, mlongitude);
 	}
 	
 	
@@ -43,6 +54,13 @@ public class MyApplication extends Application {
 		mMyLocationListener = new MyLocationListener();
 		mLocationClient.registerLocationListener(mMyLocationListener);
 		mGeofenceClient = new GeofenceClient(getApplicationContext());
+		
+		
+		// 发起定位  软件启动时就开始定位  定位结果放在listaddress中
+		if (!mLocationClient.isStarted())
+			mLocationClient.start();
+		if (mLocationClient != null && mLocationClient.isStarted())
+			mLocationClient.requestLocation();
 
 		
 	}
@@ -70,16 +88,19 @@ public class MyApplication extends Application {
 			//返回码
 			sb.append("\nerror code : ");
 			sb.append(location.getLocType());
+			mcode =location.getLocType();
 			listaddress.put("code", location.getLocType());
 			
 			//纬度
 			sb.append("\nlatitude : ");
 			sb.append(location.getLatitude());
+			mlatitude = location.getLatitude();
 			listaddress.put("latitude", location.getLatitude());
 			
 			//经度
 			sb.append("\nlongitude : ");
 			sb.append(location.getLongitude());
+			mlongitude = location.getLongitude();
 			listaddress.put("longitude", location.getLongitude());
 			
 			//精度

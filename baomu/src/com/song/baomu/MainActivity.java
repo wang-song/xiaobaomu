@@ -153,7 +153,7 @@ public class MainActivity extends Activity {
 			case R.id.main_set_phone:
 				edit_phone = main_edit_phone.getText().toString().trim();
 				if (edit_phone.equals(null) || edit_phone.equals("")
-						|| edit_phone.length() != 11) {
+						) {
 					Toast.makeText(MainActivity.this, "你的电话号码填写不正确，请重新输入。", 1)
 							.show();
 				} else {
