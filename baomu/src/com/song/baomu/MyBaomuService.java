@@ -84,6 +84,7 @@ public class MyBaomuService extends Service {
 						e.printStackTrace();
 					}
 
+					
 					// 绑定服务时，把定位信息获取到
 					listaddress = ((MyApplication) getApplicationContext())
 							.getList();

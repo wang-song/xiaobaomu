@@ -26,6 +26,7 @@ public class MySMSListen extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		
 		// TODO Auto-generated method stub
 
 		mycontext = context;
