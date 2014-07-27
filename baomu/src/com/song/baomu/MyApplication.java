@@ -10,6 +10,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.GeofenceClient;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.location.LocationClientOption.LocationMode;
 import com.baidu.mapapi.SDKInitializer;
 
 import android.app.Application;
@@ -19,6 +20,9 @@ public class MyApplication extends Application {
 	public LocationClient mLocationClient;
 	public GeofenceClient mGeofenceClient;
 	public MyLocationListener mMyLocationListener;
+	
+	//定位间隔时间
+	int span = 5000;
 	
 	
 	private Map<Object,Object> listaddress = new HashMap<Object,Object>();
@@ -35,9 +39,11 @@ public class MyApplication extends Application {
 		super.onCreate();
 		SDKInitializer.initialize(getApplicationContext());  
 		mLocationClient = new LocationClient(this.getApplicationContext());
+		InitLocation();
 		mMyLocationListener = new MyLocationListener();
 		mLocationClient.registerLocationListener(mMyLocationListener);
 		mGeofenceClient = new GeofenceClient(getApplicationContext());
+
 		
 	}
 
@@ -105,6 +111,20 @@ public class MyApplication extends Application {
 		}
 
 
+	}
+	
+	/**
+	 * 定位初始化函数
+	 */
+	private void InitLocation() {
+		LocationClientOption option = new LocationClientOption();
+		option.setLocationMode(LocationMode.Hight_Accuracy);// 设置定位模式
+		option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度，默认值gcj02
+		option.setScanSpan(span);// 设置发起定位请求的间隔时间为5000ms
+		option.isOpenGps();
+		option.setIsNeedAddress(true);
+		option.setNeedDeviceDirect(true);//返回的定位结果包含手机机头的方向
+		mLocationClient.setLocOption(option);
 	}
 
 	@Override

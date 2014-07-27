@@ -183,11 +183,12 @@ public class MyBaomuService extends Service {
 		super.onCreate();
 
 		mLocationClient = ((MyApplication) getApplication()).mLocationClient;
-		// 定位初始化
-		InitLocation();
+
 		// 发起定位
 		if (!mLocationClient.isStarted())
 			mLocationClient.start();
+		if (mLocationClient != null && mLocationClient.isStarted())
+			mLocationClient.requestLocation();
 
 		mShareUrlSearch = ShareUrlSearch.newInstance();
 		mShareUrlSearch.setOnGetShareUrlResultListener(sharelistener);
@@ -211,19 +212,7 @@ public class MyBaomuService extends Service {
 
 	}
 
-	/**
-	 * 定位初始化函数
-	 */
-	private void InitLocation() {
-		LocationClientOption option = new LocationClientOption();
-		option.setLocationMode(LocationMode.Hight_Accuracy);// 设置定位模式
-		option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度，默认值gcj02
-		int span = 5000;
-		option.setScanSpan(span);// 设置发起定位请求的间隔时间为5000ms
-		option.isOpenGps();
-		option.setIsNeedAddress(true);
-		mLocationClient.setLocOption(option);
-	}
+
 
 	/**
 	 * 把SharedPreferences中的数据转化成list集合
