@@ -9,6 +9,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.GeofenceClient;
 import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 
 import android.app.Application;
@@ -37,6 +38,7 @@ public class MyApplication extends Application {
 		mMyLocationListener = new MyLocationListener();
 		mLocationClient.registerLocationListener(mMyLocationListener);
 		mGeofenceClient = new GeofenceClient(getApplicationContext());
+		
 	}
 
 	/**
@@ -103,6 +105,13 @@ public class MyApplication extends Application {
 		}
 
 
+	}
+
+	@Override
+	public void onTerminate() {
+		// TODO Auto-generated method stub
+		mLocationClient.stop();
+		super.onTerminate();
 	}
 	
 	

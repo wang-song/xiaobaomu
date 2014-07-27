@@ -9,6 +9,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMapClickListener;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.DotOptions;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -29,6 +30,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +46,7 @@ public class MapActivity extends Activity implements
 
 	MapView mMapView = null;
 
-	private LatLng dingwei;
+	private LatLng dingwei, lat;
 	private BaiduMap mymap;
 	GeoCoder mSearch = null; // 搜索模块，也可去掉地图模块独立使用
 	private String address = "";
@@ -80,13 +82,16 @@ public class MapActivity extends Activity implements
 
 		listaddress = ((MyApplication) getApplicationContext()).getList();
 		System.out.println(listaddress);
-		
+
 		if (!(listaddress.equals(null) || listaddress.equals("") || listaddress
-				.size() == 0))
-			mymap.setMapStatus(MapStatusUpdateFactory.newLatLng(new LatLng(
-					(Double) (listaddress.get("latitude")),
-					(Double) (listaddress.get("longitude")))));
-		
+				.size() == 0)) {
+			lat = new LatLng((Double) (listaddress.get("latitude")),
+					(Double) (listaddress.get("longitude")));
+			mymap.setMapStatus(MapStatusUpdateFactory.newLatLngZoom(lat, 16.0f));
+			mymap.addOverlay(new DotOptions().center(lat).color(Color.BLUE)
+					.visible(true).radius(15).zIndex(15));
+		}
+
 		intent = new Intent(MapActivity.this, MainActivity.class);
 
 	}
@@ -227,14 +232,14 @@ public class MapActivity extends Activity implements
 								Double.toString(listoption.get(i).getPosition().longitude));
 						editor.commit();
 
-//						intent.putExtra("title" + i, listoption.get(i)
-//								.getTitle());
-//						intent.putExtra("latitude" + i, listoption.get(i)
-//								.getPosition().latitude);
-//						intent.putExtra("longitude" + i, listoption.get(i)
-//								.getPosition().longitude);
+						// intent.putExtra("title" + i, listoption.get(i)
+						// .getTitle());
+						// intent.putExtra("latitude" + i, listoption.get(i)
+						// .getPosition().latitude);
+						// intent.putExtra("longitude" + i, listoption.get(i)
+						// .getPosition().longitude);
 					}
-//					intent.putExtra("count", size);
+					// intent.putExtra("count", size);
 
 					editor.putInt("count", size);
 					editor.commit();
@@ -248,8 +253,8 @@ public class MapActivity extends Activity implements
 										int which) {
 									// TODO Auto-generated method stub
 									setResult(0, intent);
-									//关闭掉这个Activity  
-						            finish(); 
+									// 关闭掉这个Activity
+									finish();
 								}
 							}).setNegativeButton("否", new OnClickListener() {
 
