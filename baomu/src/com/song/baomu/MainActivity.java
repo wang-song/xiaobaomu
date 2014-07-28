@@ -9,6 +9,7 @@ import com.baidu.location.LocationClient;
 import com.song.baomu.MyBaomuService.MyServiceBinder;
 import com.song.menu.ResideMenu;
 import com.song.menu.ResideMenuItem;
+import com.song.smsdatabase.DingweiService;
 import com.song.smsdatabase.SmsService;
 import com.song.utils.GuideHelper;
 
@@ -24,6 +25,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,6 +58,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	String edit_phone = "";
 
 	int jingdu = 0;
+	private long exitTime = 0;
 
 	// 用于接收服务返回的binder
 	private MyServiceBinder mybinder = null;
@@ -81,7 +84,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_main);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.mycustomtitle);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
+				R.layout.mycustomtitle);
 
 		GuideHelper guideHelper = new GuideHelper(this);
 		guideHelper.openGuide();
@@ -94,7 +98,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		main_open_service.setOnClickListener(mylostener);
 		main_close_service = (Button) findViewById(R.id.main_close_service);
 		main_close_service.setOnClickListener(mylostener);
-		
+
 		main_caidan_left = (Button) findViewById(R.id.header_left_btn);
 		main_caidan_left.setOnClickListener(mylostener);
 		main_caidan_right = (Button) findViewById(R.id.header_right_btn);
@@ -132,6 +136,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		Intent in = new Intent(MainActivity.this, SmsService.class);
 		startService(in);
 
+		// 开启 定位监听服务 10秒 把定位信息写入到sharedpress中 DingweiService
+		Intent in2 = new Intent(MainActivity.this, DingweiService.class);
+		startService(in2);
 	}
 
 	@Override
@@ -176,7 +183,7 @@ public class MainActivity extends Activity implements OnClickListener {
 							.show();
 				}
 				break;
-			
+
 			case R.id.main_open_service:
 
 				// 读取精度
@@ -217,19 +224,15 @@ public class MainActivity extends Activity implements OnClickListener {
 				unbindService(conn);
 				Toast.makeText(MainActivity.this, "服务已关闭。", 1).show();
 				break;
-				
-				
+
 			case R.id.header_left_btn:
 				resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
 				break;
 			case R.id.header_right_btn:
 				resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
 				break;
-				
 
 			}
-			
-			
 
 		}
 	};
@@ -279,6 +282,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	protected void onDestroy() {
+//		stopService(null);
 		super.onDestroy();
 
 	}
@@ -300,6 +304,24 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onPause() {
 		super.onPause();
+	}
+
+	//返回键 监听事件
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(), "再按一次退出程序",
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	private void setUpMenu() {
@@ -339,10 +361,9 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	}
 
-	
-//	public boolean dispatchTouchEvent(MotionEvent ev) {
-//		return resideMenu.dispatchTouchEvent(ev);
-//	}
+	// public boolean dispatchTouchEvent(MotionEvent ev) {
+	// return resideMenu.dispatchTouchEvent(ev);
+	// }
 
 	private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
 		@Override
@@ -367,29 +388,23 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		if (view == itemHome) {
-			//主页
+			// 主页
 			resideMenu.closeMenu();
 		} else if (view == itemProfile) {
-			//帮助
-			
-			
+			// 帮助
 
 		} else if (view == itemSettings) {
-			//设置向导
-			
-			
-			
+			// 设置向导
 
 		} else if (view == itemCalendar) {
-			//设置定点
+			// 设置定点
 			Intent intent = new Intent(MainActivity.this, MapActivity.class);
 			startActivityForResult(intent, 0);
 			Toast.makeText(MainActivity.this,
 					"设置定点时，需要在地图中长按，然后会有提示，定点可以设置多个。", 1).show();
-			
 
 		} else if (view == itemCalendar2) {
-			//设置精度
+			// 设置精度
 			builder = new AlertDialog.Builder(MainActivity.this);
 			xiejingdu = new EditText(MainActivity.this);
 			builder.setTitle("请输入你想要设置的精度（米）");
@@ -398,10 +413,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			builder.setPositiveButton("确定",
 					new DialogInterface.OnClickListener() {
 
-						public void onClick(DialogInterface dialog,
-								int which) {
-							String jingdutext = xiejingdu.getText()
-									.toString().trim();
+						public void onClick(DialogInterface dialog, int which) {
+							String jingdutext = xiejingdu.getText().toString()
+									.trim();
 							if (jingdutext.length() != 0
 									&& jingdutext.matches("^[0-9]*$")) {
 								System.out.println(jingdutext);
@@ -413,8 +427,7 @@ public class MainActivity extends Activity implements OnClickListener {
 										Integer.parseInt(jingdutext));
 								editor.commit();
 
-								jingdu = mysharedxie_jingdu.getInt(
-										"jingdu", 0);
+								jingdu = mysharedxie_jingdu.getInt("jingdu", 0);
 							}
 							dialog.dismiss();
 							dialog.cancel();

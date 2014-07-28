@@ -89,6 +89,7 @@
         <service android:name=".MyBaomuService" >
         </service>
         <service android:name="com.song.smsdatabase.SmsService"></service>
+        <service android:name="com.song.smsdatabase.DingweiService"></service>
 <!--  
         <receiver android:name=".MySMSListen" >
             <intent-filter android:priority="10000" >

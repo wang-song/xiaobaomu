@@ -35,7 +35,6 @@ public class MyBaomuService extends Service {
 	private String sharedname_jingdu = "myconfig_jingdu";
 	private String sharedname_phone = "myconfig_phone";
 	//把定位点信息 每隔10秒写入文件中
-	private String sharedname_dingwei = "myconfig_dingwei";
 	private List<Map<String, String>> sharedperence = null;
 	private String shareurl = "";
 
@@ -120,17 +119,6 @@ public class MyBaomuService extends Service {
 						flag = true;
 					}
 					
-					
-					SharedPreferences mysharedxie_jingdu1 = getSharedPreferences(
-							sharedname_dingwei,
-							Context.MODE_WORLD_WRITEABLE);
-					Editor editor2 = mysharedxie_jingdu1.edit();
-					editor2.putString("latitude",listaddress.get("latitude")+"");
-					editor2.putString("longitude",listaddress.get("longitude")+"");
-					editor2.putString("shareurl",shareurl);
-					editor2.commit();
-
-
 					// 测试
 					System.out.println("服务中新线程正在运行" + flag + julimin);
 				}
