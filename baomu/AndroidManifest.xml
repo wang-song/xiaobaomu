@@ -80,6 +80,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MapActivity" />
+        <activity android:name=".HelpActivity" />
 
         <service
             android:name="com.baidu.location.f"

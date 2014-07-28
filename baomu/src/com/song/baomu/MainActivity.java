@@ -393,6 +393,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		} else if (view == itemProfile) {
 			// 帮助
 
+			Intent in = new Intent(mContext, HelpActivity.class);
+			startActivity(in);
+			
 		} else if (view == itemSettings) {
 			// 设置向导
 
