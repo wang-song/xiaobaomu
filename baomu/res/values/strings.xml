@@ -17,5 +17,7 @@
     <string name="map_view_qingchu">清除数据</string>
     <string name="main_set_dingdian">设置定点</string>
     <string name="main_set_jingdu">设置精度</string>
+    <string name="main_caidan">☆☆▷</string>
+    <string name="main_caidan1">◁☆☆</string>
 
 </resources>

@@ -27,6 +27,7 @@ import android.os.IBinder;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -47,6 +48,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private Button main_open_service;
 	private Button main_close_service;
+	private Button main_caidan_left;
+	private Button main_caidan_right;
 
 	private ListView main_listview;
 
@@ -76,7 +79,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_main);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.mycustomtitle);
 
 		GuideHelper guideHelper = new GuideHelper(this);
 		guideHelper.openGuide();
@@ -89,7 +94,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		main_open_service.setOnClickListener(mylostener);
 		main_close_service = (Button) findViewById(R.id.main_close_service);
 		main_close_service.setOnClickListener(mylostener);
-
+		
+		main_caidan_left = (Button) findViewById(R.id.header_left_btn);
+		main_caidan_left.setOnClickListener(mylostener);
+		main_caidan_right = (Button) findViewById(R.id.header_right_btn);
+		main_caidan_right.setOnClickListener(mylostener);
 
 		main_listview = (ListView) findViewById(R.id.main_list_view);
 
@@ -208,8 +217,19 @@ public class MainActivity extends Activity implements OnClickListener {
 				unbindService(conn);
 				Toast.makeText(MainActivity.this, "服务已关闭。", 1).show();
 				break;
+				
+				
+			case R.id.header_left_btn:
+				resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+				break;
+			case R.id.header_right_btn:
+				resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+				break;
+				
 
 			}
+			
+			
 
 		}
 	};
@@ -291,7 +311,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		resideMenu.setMenuListener(menuListener);
 		// valid scale factor is between 0.0f and 1.0f. leftmenu'width is
 		// 150dip.
-		resideMenu.setScaleValue(0.6f);
+		resideMenu.setScaleValue(0.55f);
 
 		// create menu items;
 		itemHome = new ResideMenuItem(this, R.drawable.icon_home, "主页");
@@ -310,19 +330,19 @@ public class MainActivity extends Activity implements OnClickListener {
 		itemCalendar2.setOnClickListener(this);
 		itemSettings.setOnClickListener(this);
 
-		resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_RIGHT);
-		resideMenu.addMenuItem(itemProfile, ResideMenu.DIRECTION_RIGHT);
-		resideMenu.addMenuItem(itemCalendar, ResideMenu.DIRECTION_RIGHT);
-		resideMenu.addMenuItem(itemCalendar2, ResideMenu.DIRECTION_RIGHT);
-		resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_RIGHT);
-		resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemProfile, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemCalendar, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemCalendar2, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_LEFT);
+		resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
 
 	}
 
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		return resideMenu.dispatchTouchEvent(ev);
-	}
+	
+//	public boolean dispatchTouchEvent(MotionEvent ev) {
+//		return resideMenu.dispatchTouchEvent(ev);
+//	}
 
 	private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
 		@Override

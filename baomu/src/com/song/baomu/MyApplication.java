@@ -30,7 +30,7 @@ public class MyApplication extends Application {
 	int span = 7000;
 	
 	
-	public Map<Object,Object> listaddress = new HashMap<Object,Object>();
+	public static Map<Object,Object> listaddress = new HashMap<Object,Object>();
 	
 	
 	//返回定位的相信信息

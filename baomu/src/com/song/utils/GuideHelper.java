@@ -30,7 +30,7 @@ public class GuideHelper {
 	private ScrollLayout scrollLayout;
 	private int[] guideResIds = {R.drawable.guide_help1, R.drawable.guide_help2, R.drawable.guide_help3, R.drawable.guide_help4};
 	private static final String GUIDE_VERSION_NAME = "GUIDEVERSION";
-	private static final int  GUIDE_VERSION_CODE = 1;
+	private static final int  GUIDE_VERSION_CODE = 2;
 	
 	public GuideHelper(Context context){
 		this.context = (Activity)context;

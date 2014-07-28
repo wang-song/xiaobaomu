@@ -858,10 +858,11 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f070003;
+        public static final int abc_search_url_text_holo=0x7f070004;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
+        public static final int black=0x7f070003;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1108,7 +1109,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050057;
+        public static final int action_settings=0x7f05005a;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1124,17 +1125,20 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
+        public static final int header_left_btn=0x7f05004e;
+        public static final int header_right_btn=0x7f050050;
+        public static final int header_text=0x7f05004f;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int iv_background=0x7f05004e;
-        public static final int iv_icon=0x7f050054;
-        public static final int iv_shadow=0x7f05004f;
-        public static final int layout_left_menu=0x7f050051;
+        public static final int iv_background=0x7f050051;
+        public static final int iv_icon=0x7f050057;
+        public static final int iv_shadow=0x7f050052;
+        public static final int layout_left_menu=0x7f050054;
         public static final int layout_phone=0x7f05003e;
-        public static final int layout_right_menu=0x7f050053;
+        public static final int layout_right_menu=0x7f050056;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
         public static final int main_close_service=0x7f050044;
@@ -1174,14 +1178,14 @@ containing a value of this type.
         public static final int showTitle=0x7f050006;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
-        public static final int sv_left_menu=0x7f050050;
-        public static final int sv_right_menu=0x7f050052;
+        public static final int sv_left_menu=0x7f050053;
+        public static final int sv_right_menu=0x7f050055;
         public static final int tabMode=0x7f050002;
-        public static final int text_button=0x7f050056;
+        public static final int text_button=0x7f050059;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int top_right_btn=0x7f050048;
-        public static final int tv_title=0x7f050055;
+        public static final int tv_title=0x7f050058;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
         public static final int withText=0x7f05000c;
@@ -1240,10 +1244,11 @@ containing a value of this type.
         public static final int guide_helper=0x7f030019;
         public static final int my_listview_layout=0x7f03001a;
         public static final int my_map_view=0x7f03001b;
-        public static final int residemenu=0x7f03001c;
-        public static final int residemenu_item=0x7f03001d;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
-        public static final int text_layout=0x7f03001f;
+        public static final int mycustomtitle=0x7f03001c;
+        public static final int residemenu=0x7f03001d;
+        public static final int residemenu_item=0x7f03001e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
+        public static final int text_layout=0x7f030020;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1292,6 +1297,8 @@ containing a value of this type.
         public static final int action_settings=0x7f0a000f;
         public static final int app_name=0x7f0a000d;
         public static final int biaoti=0x7f0a000e;
+        public static final int main_caidan=0x7f0a001d;
+        public static final int main_caidan1=0x7f0a001e;
         public static final int main_close_service=0x7f0a0015;
         public static final int main_dingdian1=0x7f0a0012;
         public static final int main_dingdian2=0x7f0a0013;
@@ -1333,6 +1340,7 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b008c;
+        public static final int MyTheme=0x7f0b008e;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;
@@ -1535,6 +1543,7 @@ containing a value of this type.
         public static final int Widget_AppCompat_ProgressBar=0x7f0b000a;
         public static final int Widget_AppCompat_ProgressBar_Horizontal=0x7f0b0009;
         public static final int Widget_AppCompat_Spinner_DropDown_ActionBar=0x7f0b0022;
+        public static final int WindowTitleBackground=0x7f0b008d;
     }
     public static final class styleable {
         /**  ============================================ 
