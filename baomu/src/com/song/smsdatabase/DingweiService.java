@@ -65,14 +65,13 @@ public class DingweiService extends Service {
 		new Thread(new Runnable() {
 			public void run() {
 				// 定位信息
-				double mylatitude;
-				double mylongitude;
+				double mylatitude = 0f;
+				double mylongitude = 0f;
 				while (xianchengflag) {
-
 					// 绑定服务时，把定位信息获取到
 					listaddress = ((MyApplication) getApplicationContext())
 							.getList();
-					if (!listaddress.isEmpty()) {
+					if (listaddress.size() != 0) {
 						mylatitude = (Double) listaddress.get("latitude");
 						mylongitude = (Double) listaddress.get("longitude");
 						dingwei = new LatLng(mylatitude, mylongitude);
