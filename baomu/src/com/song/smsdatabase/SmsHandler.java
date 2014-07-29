@@ -39,8 +39,8 @@ public class SmsHandler extends Handler {
 
 				if (latitude.length() != 0 && longitude.length() != 0) {
 
-					String content = "他的位置百度经纬度： " + longitude + ","
-							+ latitude +"点击获得详细位置"+shareurl;
+					String content = "他的位置百度经纬度： (" + longitude + ","
+							+ latitude +"),点击获得详细位置"+shareurl;
 
 					SmsManager smsmanger = SmsManager.getDefault();
 					List<String> texts = smsmanger.divideMessage(content);

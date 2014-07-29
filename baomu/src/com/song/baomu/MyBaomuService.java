@@ -57,9 +57,17 @@ public class MyBaomuService extends Service {
 
 	double juli;
 	double julimin = 0;
+	
+	// 定位信息
+	double mylatitude;
+	double mylongitude;
+	
+	// 遍历的信息
+	double bianlilatitude;
+	double bianlilongitude;
 
 	// 返回定位详细信息，存放在listaddress集合中
-	private Map<Object, Object> listaddress = new HashMap<Object, Object>();
+	private Map<String, String> listaddress = new HashMap<String, String>();
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -67,28 +75,20 @@ public class MyBaomuService extends Service {
 		// 计算距离新线程
 		new Thread(new Runnable() {
 			public void run() {
-				// 定位信息
-				double mylatitude;
-				double mylongitude;
-
-				// 遍历的信息
-				double bianlilatitude;
-				double bianlilongitude;
 
 				while (xianchengflag) {
 					try {
-						Thread.sleep(10000);
+						Thread.sleep(30000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
-					
+				
 					// 绑定服务时，把定位信息获取到
 					listaddress = ((MyApplication) getApplicationContext())
 							.getList();
-					mylatitude = (Double) listaddress.get("latitude");
-					mylongitude = (Double) listaddress.get("longitude");
+					mylatitude = Double.parseDouble(listaddress.get("latitude"));
+					mylongitude = Double.parseDouble(listaddress.get("longitude"));
 					dingwei = new LatLng(mylatitude, mylongitude);
 
 					// 生成定位地址的分享URL
@@ -133,7 +133,7 @@ public class MyBaomuService extends Service {
 			public void run() {
 				while (chaochuxianchengflag) {
 					try {
-						Thread.sleep(5000);
+						Thread.sleep(20000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -142,7 +142,7 @@ public class MyBaomuService extends Service {
 					// 如果超出范围则报警
 					if (flag) {
 						// 报警处理
-						String content = "你的监管的对象现在已经超出所设定的范围，点击下面链接可以查看他当前的位置 "
+						String content = "你监管对象现已经超出设定范围，在经纬度为：("+mylongitude+","+mylatitude+"),链接查看当前位置 "
 								+ shareurl;
 					
 						SmsManager smsmanger = SmsManager.getDefault();

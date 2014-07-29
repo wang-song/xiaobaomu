@@ -27,14 +27,14 @@ public class MyApplication extends Application {
 	private double mlongitude;
 	
 	//定位间隔时间
-	int span = 7000;
+	int span = 10000;
 	
 	
-	public Map<Object,Object> listaddress = new HashMap<Object,Object>();
+	public Map<String,String> listaddress = new HashMap<String,String>();
 	
 	
 	//返回定位的相信信息
-	public Map<Object,Object> getList(){
+	public Map<String,String> getList(){
 		return listaddress;
 	}
 	
@@ -89,24 +89,24 @@ public class MyApplication extends Application {
 			sb.append("\nerror code : ");
 			sb.append(location.getLocType());
 			mcode =location.getLocType();
-			listaddress.put("code", location.getLocType());
+			listaddress.put("code", location.getLocType()+"");
 			
 			//纬度
 			sb.append("\nlatitude : ");
 			sb.append(location.getLatitude());
 			mlatitude = location.getLatitude();
-			listaddress.put("latitude", location.getLatitude());
+			listaddress.put("latitude", location.getLatitude()+"");
 			
 			//经度
 			sb.append("\nlongitude : ");
 			sb.append(location.getLongitude());
 			mlongitude = location.getLongitude();
-			listaddress.put("longitude", location.getLongitude());
+			listaddress.put("longitude", location.getLongitude()+"");
 			
 			//精度
 			sb.append("\nradius : ");
 			sb.append(location.getRadius());
-			listaddress.put("radius", location.getRadius());
+			listaddress.put("radius", location.getRadius()+"");
 			
 			if (location.getLocType() == BDLocation.TypeGpsLocation){
 				sb.append("\nspeed : ");

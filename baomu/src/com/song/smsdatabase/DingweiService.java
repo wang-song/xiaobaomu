@@ -37,7 +37,7 @@ public class DingweiService extends Service {
 	double julimin = 0;
 
 	// 返回定位详细信息，存放在listaddress集合中
-	private Map<Object, Object> listaddress = new HashMap<Object, Object>();
+	private Map<String, String> listaddress = new HashMap<String, String>();
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -68,12 +68,21 @@ public class DingweiService extends Service {
 				double mylatitude = 0f;
 				double mylongitude = 0f;
 				while (xianchengflag) {
+					try {
+						Thread.sleep(30000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					// 绑定服务时，把定位信息获取到
 					listaddress = ((MyApplication) getApplicationContext())
 							.getList();
-					if (listaddress.size() != 0) {
-						mylatitude = (Double) listaddress.get("latitude");
-						mylongitude = (Double) listaddress.get("longitude");
+					if (listaddress.size() >= 4) {
+						System.out.println(listaddress);
+						mylatitude = Double.parseDouble(listaddress
+								.get("latitude"));
+						mylongitude = Double.parseDouble(listaddress
+								.get("longitude"));
 						dingwei = new LatLng(mylatitude, mylongitude);
 
 						// 生成定位地址的分享URL
@@ -82,7 +91,7 @@ public class DingweiService extends Service {
 										.location(dingwei)
 										.snippet("你所查看对象现在的位置").name("他的位置"));
 						try {
-							Thread.sleep(10000);
+							Thread.sleep(5000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

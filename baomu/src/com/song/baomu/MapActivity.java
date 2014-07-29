@@ -53,7 +53,7 @@ public class MapActivity extends Activity implements
 	private MarkerOptions marker = null;
 
 	private List<MarkerOptions> listoption = new ArrayList<MarkerOptions>();
-	private Map<Object, Object> listaddress = new HashMap<Object, Object>();
+	private Map<String, String> listaddress = new HashMap<String, String>();
 
 	private Intent intent;
 
@@ -85,8 +85,8 @@ public class MapActivity extends Activity implements
 
 		if (!(listaddress.equals(null) || listaddress.equals("") || listaddress
 				.size() == 0)) {
-			lat = new LatLng((Double) (listaddress.get("latitude")),
-					(Double) (listaddress.get("longitude")));
+			lat = new LatLng(Double.parseDouble((listaddress.get("latitude"))),
+					Double.parseDouble(listaddress.get("longitude")));
 			mymap.setMapStatus(MapStatusUpdateFactory.newLatLngZoom(lat, 16.0f));
 			mymap.addOverlay(new DotOptions().center(lat).color(Color.BLUE)
 					.visible(true).radius(15).zIndex(15));
