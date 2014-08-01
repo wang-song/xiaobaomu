@@ -40,5 +40,6 @@
     <string name="quxiao">取消</string>
     <string name="xiayibu">下一步</string>
     <string name="xiayibu2">下一步(定点)</string>
+    <string name="seclect_map_tv">该定点的详细位置(圆点是您当前位置，图钉代表的就是定点的位置):</string>
 
 </resources>

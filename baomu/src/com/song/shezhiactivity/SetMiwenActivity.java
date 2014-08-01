@@ -64,7 +64,7 @@ public class SetMiwenActivity extends Activity implements OnClickListener{
 				editor.putString("miwen",miwentext);
 				editor.commit();
 				Toast.makeText(SetMiwenActivity.this,
-						"您已成功将报警精度范围设置为 " + miwentext, 1).show();
+						"您已成功密码设置为 " + miwentext, 1).show();
 				//下一步  设置定点
 				Intent in = new Intent(SetMiwenActivity.this,SetDingdianActivity.class);
 				startActivity(in);

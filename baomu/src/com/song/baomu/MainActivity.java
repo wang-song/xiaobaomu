@@ -9,6 +9,7 @@ import com.baidu.location.LocationClient;
 import com.song.baomu.MyBaomuService.MyServiceBinder;
 import com.song.menu.ResideMenu;
 import com.song.menu.ResideMenuItem;
+import com.song.shezhiactivity.SetMiwenActivity;
 import com.song.shezhiactivity.SetPhoneActivity;
 import com.song.smsdatabase.DingweiService;
 import com.song.smsdatabase.SmsService;
@@ -44,6 +45,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private String sharedname_dian = "myconfig_dian";
 	private String sharedname_jingdu = "myconfig_jingdu";
 	private String sharedname_phone = "myconfig_phone";
+	private String sharedname_miwen = "myconfig_miwen";
 
 	private EditText main_edit_phone;
 
@@ -71,8 +73,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	private LocationClient mLocationClient;
 
 	private EditText xiejingdu;
+	private EditText xiejingdu1;
 
 	AlertDialog.Builder builder;
+	AlertDialog.Builder builder2;
 
 	private ResideMenu resideMenu;
 	private MainActivity mContext;
@@ -80,6 +84,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private ResideMenuItem itemProfile;
 	private ResideMenuItem itemCalendar;
 	private ResideMenuItem itemCalendar2;
+	private ResideMenuItem itemCalendar3;
 	private ResideMenuItem itemSettings;
 
 	@Override
@@ -133,11 +138,14 @@ public class MainActivity extends Activity implements OnClickListener {
 				// 1).show();
 				// 点击item则获取经纬度打开百度地图
 				
+				Intent inte = new Intent(MainActivity.this,MapSecletActivity.class);
+				inte.putExtra("latitude", list.get(position).get("latitude"));
+				inte.putExtra("longitude", list.get(position).get("longitude"));
+				inte.putExtra("title", list.get(position).get("title"));
+				startActivity(inte);
 				
 				
-				
-				
-				
+
 
 			}
 
@@ -355,17 +363,21 @@ public class MainActivity extends Activity implements OnClickListener {
 				"设置定点");
 		itemCalendar2 = new ResideMenuItem(this, R.drawable.icon_calendar,
 				"设置精度");
+		itemCalendar3 = new ResideMenuItem(this, R.drawable.icon_calendar,
+				"设置密码");
 
 		itemHome.setOnClickListener(this);
 		itemProfile.setOnClickListener(this);
 		itemCalendar.setOnClickListener(this);
 		itemCalendar2.setOnClickListener(this);
+		itemCalendar3.setOnClickListener(this);
 		itemSettings.setOnClickListener(this);
 
 		resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemProfile, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemCalendar, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemCalendar2, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemCalendar3, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_LEFT);
 		resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
 
@@ -459,6 +471,48 @@ public class MainActivity extends Activity implements OnClickListener {
 
 			builder.show();
 
+		}else if (view == itemCalendar3) {
+			
+			builder2 = new AlertDialog.Builder(MainActivity.this);
+			xiejingdu1 = new EditText(MainActivity.this);
+			builder2.setTitle("请输入你想要设置的密码");
+			builder2.setIcon(android.R.drawable.ic_dialog_info);
+			builder2.setView(xiejingdu1);
+			builder2.setPositiveButton("确定",
+					new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface dialog, int which) {
+							String miwentext = xiejingdu1.getText().toString()
+									.trim();
+							if (miwentext.length() != 0) {
+								System.out.println(miwentext);
+
+								SharedPreferences shared = getSharedPreferences(
+										sharedname_miwen,
+										Context.MODE_WORLD_WRITEABLE);
+								Editor editor = shared.edit();
+								editor.putString("miwen",miwentext);
+								editor.commit();
+							}
+							dialog.dismiss();
+							dialog.cancel();
+							Toast.makeText(MainActivity.this,
+									"您已成功将密码设置为 " + miwentext, 1).show();
+						}
+
+					});
+			builder2.setNegativeButton("取消", null);
+
+			builder2.create();
+
+			builder2.show();
+
+
+			
+			
+			
+			
+			
 		}
 
 		resideMenu.closeMenu();

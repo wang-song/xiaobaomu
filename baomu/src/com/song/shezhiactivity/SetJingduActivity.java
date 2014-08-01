@@ -1,6 +1,5 @@
 package com.song.shezhiactivity;
 
-import com.song.baomu.MainActivity;
 import com.song.baomu.R;
 
 import android.app.Activity;
@@ -14,6 +13,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+
+/**
+ * 设置精度的类  一键设置的精度
+ * @author wangsong
+ *
+ */
 
 public class SetJingduActivity extends Activity implements OnClickListener{
 	

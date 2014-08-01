@@ -39,6 +39,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
+/**
+ * 设置定点数据类
+ * 一键设置向导 
+ * @author wangsong
+ *
+ */
 public class SetDingdianActivity extends Activity implements
 		OnGetGeoCoderResultListener {
 
