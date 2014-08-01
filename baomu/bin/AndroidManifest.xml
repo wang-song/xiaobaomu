@@ -81,6 +81,10 @@
         </activity>
         <activity android:name=".MapActivity" />
         <activity android:name=".HelpActivity" />
+        <activity android:name="com.song.shezhiactivity.SetPhoneActivity" />
+        <activity android:name="com.song.shezhiactivity.SetJingduActivity" />
+        <activity android:name="com.song.shezhiactivity.SetMiwenActivity" />
+        <activity android:name="com.song.shezhiactivity.SetDingdianActivity" />
 
         <service
             android:name="com.baidu.location.f"

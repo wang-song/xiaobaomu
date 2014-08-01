@@ -17,6 +17,9 @@ import android.telephony.SmsManager;
 public class SmsHandler extends Handler {
 	private Context mcontext;
 	private String sharedname_dingwei = "myconfig_dingwei";
+	
+	private String sharedname_miwen = "myconfig_miwen";
+	
 
 	public SmsHandler(Context context) {
 		this.mcontext = context;
@@ -26,10 +29,14 @@ public class SmsHandler extends Handler {
 	public void handleMessage(Message msg) {
 		SmsInfo smsInfo = (SmsInfo) msg.obj;
 		if (smsInfo.action == 0) {
+			
+			SharedPreferences shared = mcontext.getSharedPreferences(sharedname_miwen,Context.MODE_WORLD_READABLE);
+			String miwen = shared.getString("miwen", "");
+			
 			System.out.println(smsInfo.smsBody);
 			String msgTxt = smsInfo.smsBody;
 
-			if (msgTxt.startsWith("weizhi")) {
+			if (msgTxt.startsWith(miwen)) {
 
 				SharedPreferences myshared = mcontext.getSharedPreferences(
 						sharedname_dingwei, Context.MODE_WORLD_READABLE);

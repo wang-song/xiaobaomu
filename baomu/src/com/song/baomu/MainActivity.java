@@ -9,6 +9,7 @@ import com.baidu.location.LocationClient;
 import com.song.baomu.MyBaomuService.MyServiceBinder;
 import com.song.menu.ResideMenu;
 import com.song.menu.ResideMenuItem;
+import com.song.shezhiactivity.SetPhoneActivity;
 import com.song.smsdatabase.DingweiService;
 import com.song.smsdatabase.SmsService;
 import com.song.utils.GuideHelper;
@@ -64,6 +65,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private MyServiceBinder mybinder = null;
 	// 与服务的链接
 	private MyServiceConnection conn = new MyServiceConnection();
+	
+	public List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 
 	private LocationClient mLocationClient;
 
@@ -117,6 +120,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		// 创建菜单
 		mContext = this;
 		setUpMenu();
+		
+		list = getDate();
 
 		// listview 点击事件
 		main_listview.setOnItemClickListener(new OnItemClickListener() {
@@ -127,6 +132,12 @@ public class MainActivity extends Activity implements OnClickListener {
 				// Toast.makeText(getApplicationContext(), position+"&&"+id,
 				// 1).show();
 				// 点击item则获取经纬度打开百度地图
+				
+				
+				
+				
+				
+				
 
 			}
 
@@ -147,7 +158,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 0 && resultCode == 0) {
 
-			List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 			list = getDate();
 			if (list.size() != 0) {
 				main_listview.setAdapter(new SimpleAdapter(
@@ -397,8 +407,12 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(in);
 			
 		} else if (view == itemSettings) {
+			
 			// 设置向导
+			Intent in1 = new Intent(mContext, SetPhoneActivity.class);
+			startActivity(in1);
 
+			
 		} else if (view == itemCalendar) {
 			// 设置定点
 			Intent intent = new Intent(MainActivity.this, MapActivity.class);

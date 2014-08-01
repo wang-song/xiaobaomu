@@ -32,5 +32,13 @@
         	&#160;&#160;&#160;&#160;&#160;&#160;3。此软件只要开启，用任意的手机向安装软件的手机发送“weizhi”指令，
         	该手机就会回复一条包含你详细位置信息的短息，您可以随时查看动态（此服务不需要手动开启，软件运行后自动开启）。	
         </string>
+    <string name="set_phone_view_tv">请输入你的报警手机号码(超出范围后会向报警电话发送消息，包含着详细地理位置)：</string>
+    <string name="set_miwen_view_et">请输入你的密码短信（该密码用于短信获取监控人当前的位置，向监控人手机发送此密码
+        	就会回复详细的地理信息）：</string>
+    <string name="set_jingdu_view_tv">请输入你的报警的精度范围（以定点为中心，精度为半径是授权范围，
+        	只要目标超出这个范围，就会向报警电话发送短信提醒。单位：米）：</string>
+    <string name="quxiao">取消</string>
+    <string name="xiayibu">下一步</string>
+    <string name="xiayibu2">下一步(定点)</string>
 
 </resources>

@@ -1109,7 +1109,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05005d;
+        public static final int action_settings=0x7f050066;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int baomu_help_sv=0x7f050047;
@@ -1175,6 +1175,15 @@ containing a value of this type.
         public static final int search_src_text=0x7f050037;
         public static final int search_voice_btn=0x7f05003b;
         public static final int server=0x7f050041;
+        public static final int set_jigndu_et=0x7f05005c;
+        public static final int set_jingdu_view_quxiao=0x7f05005d;
+        public static final int set_jingdu_view_xiayibu=0x7f05005e;
+        public static final int set_miwen_et=0x7f05005f;
+        public static final int set_miwen_view_quxiao=0x7f050060;
+        public static final int set_miwen_view_xiayibu=0x7f050061;
+        public static final int set_phone_et=0x7f050062;
+        public static final int set_phone_view_quxiao=0x7f050063;
+        public static final int set_phone_view_xiayibu=0x7f050064;
         public static final int shortcut=0x7f05002e;
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
@@ -1184,7 +1193,7 @@ containing a value of this type.
         public static final int sv_left_menu=0x7f050056;
         public static final int sv_right_menu=0x7f050058;
         public static final int tabMode=0x7f050002;
-        public static final int text_button=0x7f05005c;
+        public static final int text_button=0x7f050065;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int top_right_btn=0x7f05004b;
@@ -1251,8 +1260,11 @@ containing a value of this type.
         public static final int mycustomtitle=0x7f03001d;
         public static final int residemenu=0x7f03001e;
         public static final int residemenu_item=0x7f03001f;
-        public static final int support_simple_spinner_dropdown_item=0x7f030020;
-        public static final int text_layout=0x7f030021;
+        public static final int set_jingdu_view=0x7f030020;
+        public static final int set_miwen_view=0x7f030021;
+        public static final int set_phone_view=0x7f030022;
+        public static final int support_simple_spinner_dropdown_item=0x7f030023;
+        public static final int text_layout=0x7f030024;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1318,6 +1330,12 @@ containing a value of this type.
         public static final int map_view_qingchu=0x7f0a001a;
         public static final int map_view_queding=0x7f0a0019;
         public static final int map_view_textview=0x7f0a0018;
+        public static final int quxiao=0x7f0a0024;
+        public static final int set_jingdu_view_tv=0x7f0a0023;
+        public static final int set_miwen_view_et=0x7f0a0022;
+        public static final int set_phone_view_tv=0x7f0a0021;
+        public static final int xiayibu=0x7f0a0025;
+        public static final int xiayibu2=0x7f0a0026;
     }
     public static final class style {
         /** 
