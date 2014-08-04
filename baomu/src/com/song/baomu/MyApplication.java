@@ -122,13 +122,13 @@ public class MyApplication extends Application {
 				//详细地址
 				sb.append("\naddr : ");
 				sb.append(location.getAddrStr());
-				listaddress.put("addr",location.getAddrStr());
+				listaddress.put("address",location.getAddrStr());
 				//运营商信息
 				sb.append("\noperationers : ");
 				sb.append(location.getOperators());
 			}
 			//System.out.println(sb.toString());
-			System.out.println("正在定位"+location.getLocType());
+			//System.out.println("正在定位"+location.getLocType());
 		}
 
 

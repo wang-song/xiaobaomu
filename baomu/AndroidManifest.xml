@@ -57,7 +57,8 @@
     <!-- 接收信权限 -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" >
     </uses-permission>
-    <uses-permission android:name="android.permission.WRITE_SMS"/>.
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
 
     <application
         android:name=".MyApplication"
@@ -86,6 +87,7 @@
         <activity android:name="com.song.shezhiactivity.SetJingduActivity" />
         <activity android:name="com.song.shezhiactivity.SetMiwenActivity" />
         <activity android:name="com.song.shezhiactivity.SetDingdianActivity" />
+        <activity android:name="com.song.dingweidb.WeiZhiShowActivity" />
 
         <service
             android:name="com.baidu.location.f"
@@ -96,6 +98,7 @@
         </service>
         <service android:name="com.song.smsdatabase.SmsService"></service>
         <service android:name="com.song.smsdatabase.DingweiService"></service>
+        <service android:name="com.song.dingweidb.SaveDingweiService"></service>
 <!--  
         <receiver android:name=".MySMSListen" >
             <intent-filter android:priority="10000" >

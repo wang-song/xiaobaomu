@@ -1,0 +1,1 @@
+create table weizhi (time varchar(20),longitude varchar(20),latitude varchar(20),address varchar(40),lingwai varchar(25));

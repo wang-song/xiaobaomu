@@ -29,6 +29,8 @@ public class SmsService extends Service {
 		mObserver = new SmsObserver(resolver, new SmsHandler(this));
 		resolver.registerContentObserver(Uri.parse("content://sms"), true,
 				mObserver);
+
+		
 	}
 
 	@Override

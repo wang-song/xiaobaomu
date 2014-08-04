@@ -44,6 +44,8 @@ public class MapSecletActivity extends Activity {
 		latitude = Double.parseDouble(intn.getStringExtra("latitude"));
 		longitude = Double.parseDouble(intn.getStringExtra("longitude"));
 		title = intn.getStringExtra("title");
+		
+		System.out.println(latitude+"##"+longitude+"##"+title+"ggggggggggg");
 
 		mMapView = (MapView) findViewById(R.id.baidumapView);
 
@@ -59,7 +61,7 @@ public class MapSecletActivity extends Activity {
 			//当前位置的相信地理位置  在地图上用圆点显示
 			lat = new LatLng(Double.parseDouble((listaddress.get("latitude"))),
 					Double.parseDouble(listaddress.get("longitude")));
-			mymap.setMapStatus(MapStatusUpdateFactory.newLatLngZoom(lat, 15.0f));
+			mymap.setMapStatus(MapStatusUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15.0f));
 			mymap.addOverlay(new DotOptions().center(lat).color(Color.BLUE)
 					.visible(true).radius(15).zIndex(15));
 		}
