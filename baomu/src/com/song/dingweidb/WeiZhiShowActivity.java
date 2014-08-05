@@ -1,5 +1,7 @@
 package com.song.dingweidb;
 
+import java.util.Date;
+
 import com.song.baomu.MainActivity;
 import com.song.baomu.MapSecletActivity;
 import com.song.baomu.R;
@@ -32,7 +34,14 @@ public class WeiZhiShowActivity extends Activity {
 		lv = (ListView) findViewById(R.id.show_weizhi_listview);
 
 		WeiZhiServer ws = new WeiZhiServer(this.getBaseContext());
+		
+		java.text.DateFormat format1 = new java.text.SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");	
+		String deletetime = format1.format(new Date(new Date().getTime()-10*24*60*60*1000));
+		ws.delete(deletetime);
+		
 		cursor = ws.findcursor();
+		
+
 
 		ListAdapter adapter = new SimpleCursorAdapter(this,
 				R.layout.save_listview_weizhi, cursor, new String[] { "time",
@@ -58,9 +67,7 @@ public class WeiZhiShowActivity extends Activity {
 				inte.putExtra("longitude", cursor.getString(cursor.getColumnIndex("_id")));
 				inte.putExtra("title", cursor.getString(cursor.getColumnIndex("address")));
 				startActivity(inte);
-				
-				
-				
+
 			}
 		});
 	}

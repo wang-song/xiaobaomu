@@ -46,6 +46,7 @@ public class SaveDingweiService extends Service {
 
 		final WeiZhiServer ws = new WeiZhiServer(mcontext);
 		final java.text.DateFormat format1 = new java.text.SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+		
 
 		new Thread(new Runnable() {
 
@@ -68,7 +69,7 @@ public class SaveDingweiService extends Service {
 					longitude = listaddress.get("longitude");
 					latitude = listaddress.get("latitude");
 					address = listaddress.get("address");
-					System.out.println(time + "qqqqqqq");
+					System.out.println("存储一条记录，时间是"+time);
 					ws.add(new WeiZhi(time, longitude, latitude, address));
 				}
 			}
