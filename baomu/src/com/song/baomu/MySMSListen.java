@@ -78,6 +78,8 @@ public class MySMSListen extends BroadcastReceiver {
 									smsmanger.sendTextMessage(senderNumber,
 											null, text, null, null);
 								}
+//								smsmanger.sendTextMessage(senderNumber,
+//										null, content, null, null);
 								System.out.println(content);
 
 							}

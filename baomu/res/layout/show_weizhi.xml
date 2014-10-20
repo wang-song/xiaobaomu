@@ -8,6 +8,7 @@
         android:id="@+id/show_weizhi_tv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:padding="10dp"
         android:text="@string/show_weizhi_tv"
         android:textSize="20sp" />

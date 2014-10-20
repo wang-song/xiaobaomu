@@ -22,8 +22,6 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
-import com.song.baomu.MainActivity;
-import com.song.baomu.R;
 import com.song.baomu.*;
 
 import android.app.Activity;
@@ -37,14 +35,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-
 /**
- * 设置定点数据类
- * 一键设置向导 
+ * 设置定点数据类 一键设置向导
+ * 
  * @author wangsong
- *
+ * 
  */
 public class SetDingdianActivity extends Activity implements
 		OnGetGeoCoderResultListener {
@@ -66,6 +64,9 @@ public class SetDingdianActivity extends Activity implements
 	private Map<String, String> listaddress = new HashMap<String, String>();
 
 	private Intent intent;
+
+	private EditText xiedizhi;
+	AlertDialog.Builder builder;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -156,38 +157,69 @@ public class SetDingdianActivity extends Activity implements
 	 */
 	public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
 		// TODO Auto-generated method stub
-		if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-			Toast.makeText(SetDingdianActivity.this, "抱歉，未能找到结果",
-					Toast.LENGTH_LONG).show();
+		if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR
+				|| result.getAddress().equals("")
+				|| result.getAddress().equals(null)) {
+			Toast.makeText(SetDingdianActivity.this, "抱歉，未能找到结果", 0).show();
+
+			builder = new AlertDialog.Builder(SetDingdianActivity.this);
+			xiedizhi = new EditText(SetDingdianActivity.this);
+			builder.setTitle("提示");
+			builder.setMessage("没有结果，请输入您自定义的地址：");
+			builder.setView(xiedizhi);
+			builder.setPositiveButton("确定", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					marker = new MarkerOptions()
+							.position(dingwei)
+							.icon(BitmapDescriptorFactory
+									.fromResource(R.drawable.tuding))
+							.title(xiedizhi.getText().toString().trim());
+
+					listoption.add(marker);
+					mymap.addOverlay(marker);
+					// mymap.setMapStatus(MapStatusUpdateFactory.newLatLng(result.getLocation()));
+
+				}
+
+			});
+			builder.setNegativeButton("取消", null);
+			builder.create();
+			builder.show();
+
 		} else {
 			marker = new MarkerOptions()
 					.position(result.getLocation())
 					.icon(BitmapDescriptorFactory
-							.fromResource(R.drawable.tuding))
-					.title(result.getAddress());
+							.fromResource(R.drawable.tuding));
+
 
 			address = result.getAddress();
 
-			new AlertDialog.Builder(SetDingdianActivity.this).setTitle("确认")
-					.setMessage("是否将 " + address + " 加入定点？")
-					.setPositiveButton("是", new OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							listoption.add(marker);
-							mymap.addOverlay(marker);
-							// mymap.setMapStatus(MapStatusUpdateFactory.newLatLng(result.getLocation()));
+			builder = new AlertDialog.Builder(SetDingdianActivity.this);
+			xiedizhi = new EditText(SetDingdianActivity.this);
+			xiedizhi.setText(address);
+			builder.setTitle("确认");
+			builder.setMessage("是否将 " + address + " 加入定点？(在下面输入框中可以修改)");
+			builder.setView(xiedizhi);
+			builder.setPositiveButton("确定", new OnClickListener() {
 
-						}
-					}).setNegativeButton("否", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					marker.title(xiedizhi.getText().toString().trim());
+					listoption.add(marker);
+					mymap.addOverlay(marker);
+					// mymap.setMapStatus(MapStatusUpdateFactory.newLatLng(result.getLocation()));
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-
-						}
-					}).show();
+				}
+			});
+			builder.setNegativeButton("取消", null);
+			builder.create();
+			builder.show();
 
 		}
 
@@ -263,7 +295,7 @@ public class SetDingdianActivity extends Activity implements
 										int which) {
 									// TODO Auto-generated method stub
 									startActivity(intent);
-									//setResult(0, intent);
+									// setResult(0, intent);
 									// 关闭掉这个Activity
 									finish();
 								}
@@ -286,6 +318,8 @@ public class SetDingdianActivity extends Activity implements
 				mymap.clear();
 				editor.clear();
 				editor.commit();
+				mymap.addOverlay(new DotOptions().center(lat).color(Color.BLUE)
+						.visible(true).radius(15).zIndex(15));
 				break;
 
 			}

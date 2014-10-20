@@ -31,9 +31,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MapActivity extends Activity implements
@@ -56,6 +59,10 @@ public class MapActivity extends Activity implements
 	private Map<String, String> listaddress = new HashMap<String, String>();
 
 	private Intent intent;
+	private int time = 0;
+	private boolean timeflag = true;
+	private EditText xiedizhi;
+	AlertDialog.Builder builder;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -103,11 +110,43 @@ public class MapActivity extends Activity implements
 
 		@Override
 		public void onMapLongClick(LatLng arg0) {
-			// TODO Auto-generated method stub
-			dingwei = arg0;
-			// 反向地理编码
-			mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(dingwei));
 
+			dingwei = arg0;
+
+			if (panNetwork()) {
+				// 反向地理编码
+				mSearch.reverseGeoCode(new ReverseGeoCodeOption()
+						.location(dingwei));
+			} else {
+
+				builder = new AlertDialog.Builder(MapActivity.this);
+				xiedizhi = new EditText(MapActivity.this);
+				builder.setTitle("提示");
+				builder.setMessage("没有联网，请输入您自定义的地址：");
+				builder.setView(xiedizhi);
+				builder.setPositiveButton("确定", new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						marker = new MarkerOptions()
+								.position(dingwei)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.tuding))
+								.title(xiedizhi.getText().toString().trim());
+
+						listoption.add(marker);
+						mymap.addOverlay(marker);
+						// mymap.setMapStatus(MapStatusUpdateFactory.newLatLng(result.getLocation()));
+
+					}
+
+				});
+				builder.setNegativeButton("取消", null);
+				builder.create();
+				builder.show();
+
+			}
 		}
 	};
 
@@ -146,38 +185,70 @@ public class MapActivity extends Activity implements
 	 */
 	public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
 		// TODO Auto-generated method stub
-		if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-			Toast.makeText(MapActivity.this, "抱歉，未能找到结果", Toast.LENGTH_LONG)
+		if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR
+				|| result.getAddress().equals("")
+				|| result.getAddress().equals(null)) {
+
+			Toast.makeText(MapActivity.this, "抱歉，未能找到结果", 0)
 					.show();
+
+			builder = new AlertDialog.Builder(MapActivity.this);
+			xiedizhi = new EditText(MapActivity.this);
+			builder.setTitle("提示");
+			builder.setMessage("没有结果，请输入您自定义的地址：");
+			builder.setView(xiedizhi);
+			builder.setPositiveButton("确定", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					marker = new MarkerOptions()
+							.position(dingwei)
+							.icon(BitmapDescriptorFactory
+									.fromResource(R.drawable.tuding))
+							.title(xiedizhi.getText().toString().trim());
+
+					listoption.add(marker);
+					mymap.addOverlay(marker);
+					// mymap.setMapStatus(MapStatusUpdateFactory.newLatLng(result.getLocation()));
+
+				}
+
+			});
+			builder.setNegativeButton("取消", null);
+			builder.create();
+			builder.show();
+
 		} else {
 			marker = new MarkerOptions()
 					.position(result.getLocation())
 					.icon(BitmapDescriptorFactory
-							.fromResource(R.drawable.tuding))
-					.title(result.getAddress());
+							.fromResource(R.drawable.tuding));
+
 
 			address = result.getAddress();
 
-			new AlertDialog.Builder(MapActivity.this).setTitle("确认")
-					.setMessage("是否将 " + address + " 加入定点？")
-					.setPositiveButton("是", new OnClickListener() {
+			builder = new AlertDialog.Builder(MapActivity.this);
+			xiedizhi = new EditText(MapActivity.this);
+			xiedizhi.setText(address);
+			builder.setTitle("确认");
+			builder.setMessage("是否将 " + address + " 加入定点？(在下面输入框中可以修改)");
+			builder.setView(xiedizhi);
+			builder.setPositiveButton("确定", new OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							listoption.add(marker);
-							mymap.addOverlay(marker);
-							// mymap.setMapStatus(MapStatusUpdateFactory.newLatLng(result.getLocation()));
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					marker.title(xiedizhi.getText().toString().trim());
+					listoption.add(marker);
+					mymap.addOverlay(marker);
+					// mymap.setMapStatus(MapStatusUpdateFactory.newLatLng(result.getLocation()));
 
-						}
-					}).setNegativeButton("否", new OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-
-						}
-					}).show();
+				}
+			});
+			builder.setNegativeButton("取消", null);
+			builder.create();
+			builder.show();
 
 		}
 
@@ -275,11 +346,26 @@ public class MapActivity extends Activity implements
 				mymap.clear();
 				editor.clear();
 				editor.commit();
+				mymap.addOverlay(new DotOptions().center(lat).color(Color.BLUE)
+						.visible(true).radius(15).zIndex(15));
 				break;
 
 			}
 		}
 	};
+
+	// 判断手机是否联网
+	public boolean panNetwork() {
+		ConnectivityManager cManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo info = cManager.getActiveNetworkInfo();
+		if (info != null && info.isAvailable()) {
+			// 能联网
+			return true;
+		} else {
+			// 不能联网
+			return false;
+		}
+	}
 
 	protected void onDestroy() {
 		super.onDestroy();

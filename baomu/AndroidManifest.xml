@@ -59,6 +59,7 @@
     </uses-permission>
     <uses-permission android:name="android.permission.WRITE_SMS"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+    
 
     <application
         android:name=".MyApplication"
@@ -69,6 +70,8 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="RckBb6lADRyBHaEnMvGbRQ4y" />
+        <!--打包  WrSiXdka0CpxHycAOeK3iiwQ -->
+        <!--测试  RckBb6lADRyBHaEnMvGbRQ4y -->
 
         <activity
             android:name=".MainActivity"
@@ -88,6 +91,7 @@
         <activity android:name="com.song.shezhiactivity.SetMiwenActivity" />
         <activity android:name="com.song.shezhiactivity.SetDingdianActivity" />
         <activity android:name="com.song.dingweidb.WeiZhiShowActivity" />
+        <activity android:name=".OffLineMap" />
 
         <service
             android:name="com.baidu.location.f"

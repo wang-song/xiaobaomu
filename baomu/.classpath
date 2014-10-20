@@ -8,8 +8,8 @@
 	<classpathentry exported="true" kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/android_api_1.1_forsdk.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/galaxy_mini.jar"/>
-	<classpathentry kind="lib" path="libs/baidumapapi_v3_0_0.jar"/>
-	<classpathentry kind="lib" path="libs/locSDK_4.2.jar"/>
-	<classpathentry kind="lib" path="libs/nineoldandroids-library-2.4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/baidumapapi_v3_0_0.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/locSDK_4.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/nineoldandroids-library-2.4.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

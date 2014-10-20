@@ -142,14 +142,15 @@ public class MyBaomuService extends Service {
 					// 如果超出范围则报警
 					if (flag) {
 						// 报警处理
-						String content = "你监管对象现已经超出设定范围，在经纬度为：("+mylongitude+","+mylatitude+"),链接查看当前位置 "
-								+ shareurl;
+						String content ="链接查看当前位置"+shareurl+" 你监管对象现已经超出设定范围，在经纬度为：("+mylongitude+","+mylatitude+")";
 					
 						SmsManager smsmanger = SmsManager.getDefault();
 						List<String> texts = smsmanger.divideMessage(content);
 						for(String text:texts){
 							smsmanger.sendTextMessage(phone, null, text, null, null);
 						}
+//						smsmanger.sendTextMessage(phone, null, content, null, null);
+						
 						chaochuxianchengflag = false;
 						System.out.println(content+chaochuxianchengflag);
 

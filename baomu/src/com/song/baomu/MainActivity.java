@@ -11,7 +11,6 @@ import com.song.dingweidb.SaveDingweiService;
 import com.song.dingweidb.WeiZhiShowActivity;
 import com.song.menu.ResideMenu;
 import com.song.menu.ResideMenuItem;
-import com.song.shezhiactivity.SetMiwenActivity;
 import com.song.shezhiactivity.SetPhoneActivity;
 import com.song.smsdatabase.DingweiService;
 import com.song.smsdatabase.SmsService;
@@ -30,7 +29,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -89,6 +87,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private ResideMenuItem itemCalendar3;
 	private ResideMenuItem itemCalendar4;
 	private ResideMenuItem itemSettings;
+	private ResideMenuItem itemOffmap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -374,6 +373,8 @@ public class MainActivity extends Activity implements OnClickListener {
 				"设置密码");
 		itemCalendar4 = new ResideMenuItem(this, R.drawable.icon_calendar,
 				"查看数据");
+		itemOffmap = new ResideMenuItem(this, R.drawable.icon_settings,
+				"离线地图");
 
 		itemHome.setOnClickListener(this);
 		itemProfile.setOnClickListener(this);
@@ -382,6 +383,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		itemCalendar3.setOnClickListener(this);
 		itemCalendar4.setOnClickListener(this);
 		itemSettings.setOnClickListener(this);
+		itemOffmap.setOnClickListener(this);
 
 		resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemProfile, ResideMenu.DIRECTION_LEFT);
@@ -390,6 +392,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		resideMenu.addMenuItem(itemCalendar3, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemCalendar4, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_LEFT);
+		resideMenu.addMenuItem(itemOffmap, ResideMenu.DIRECTION_LEFT);
 		resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
 
 	}
@@ -521,6 +524,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 		}else if(view == itemCalendar4){
 			Intent intent = new Intent(MainActivity.this, WeiZhiShowActivity.class);
+			startActivity(intent);	
+		}else if(view == itemOffmap){
+			Intent intent = new Intent(MainActivity.this, OffLineMap.class);
 			startActivity(intent);	
 		}
 

@@ -1,7 +1,5 @@
 package com.song.utils;
 
-
-
 import com.song.baomu.R;
 import com.song.utils.ScrollLayout.PageEndListener;
 

@@ -41,8 +41,6 @@ public class WeiZhiShowActivity extends Activity {
 		
 		cursor = ws.findcursor();
 		
-
-
 		ListAdapter adapter = new SimpleCursorAdapter(this,
 				R.layout.save_listview_weizhi, cursor, new String[] { "time",
 						"_id", "latitude", "address" }, new int[] {
