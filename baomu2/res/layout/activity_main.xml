@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.song.baomu.MainActivity" >
+
+    <TextView
+        android:id="@+id/biaoti"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/biaoti"
+        android:textSize="26sp" />
+
+    <RelativeLayout
+        android:id="@+id/phone_dingdian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/biaoti" >
+
+        <LinearLayout
+            android:id="@+id/layout_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_phone"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/main_edit_phone"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+
+            <Button
+                android:id="@+id/main_set_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:text="@string/main_set_phone"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_dingdian"
+        android:paddingTop="15sp" >
+
+        <LinearLayout
+            android:id="@+id/main_service"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="19sp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/main_open_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/main_opne_service" />
+
+            <Button
+                android:id="@+id/main_close_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/main_close_service" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/server"
+        android:paddingTop="15sp" >
+
+        <ListView
+            android:id="@+id/main_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp" >
+        </ListView>
+    </RelativeLayout>
+
+</RelativeLayout>

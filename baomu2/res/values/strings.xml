@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">安全小保姆</string>
+    <string name="biaoti">安全小保姆</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_phone">手机号</string>
+    <string name="main_set_phone">设置</string>
+    <string name="main_dingdian1">定点一</string>
+    <string name="main_dingdian2">定点二</string>
+    <string name="main_opne_service">开启服务</string>
+    <string name="main_close_service">关闭服务</string>
+    <string name="main_one_set">设置向导</string>
+    <string name="main_help">用户帮助</string>
+    <string name="map_view_textview">设置定点</string>
+    <string name="map_view_queding">确定返回</string>
+    <string name="map_view_qingchu">清除数据</string>
+    <string name="map_view_baocun">保存路线</string>
+    <string name="main_set_dingdian">设置定点</string>
+    <string name="more_mian_queding">选择返回</string>
+    <string name="more_mian_qingchu">删除路线</string>
+    <string name="more_mian_cakan">查看路线</string>
+    <string name="more_mian_shezhi">设置路线</string>
+    <string name="main_set_jingdu">设置精度</string>
+    <string name="main_caidan">☆☆▷</string>
+    <string name="main_caidan1">◁☆☆</string>
+    <string name="help_title">帮助文档</string>
+    <string name="help_content">&#160;&#160;&#160;&#160;&#160;&#160;1。此软件需要联网定位，如果不联网，
+        	用GPS也能，不能反编码，只能获取到详细的经纬度，联网通过百度服务能反编码获取到具体的地址，
+       		 也能生成短链，该短链能在电脑和手机的浏览器或者百度客户端中打开，并指出相应的位置。\n
+        	&#160;&#160;&#160;&#160;&#160;&#160;2。打开软件，进入主页面后，向左滑动，可以出现菜单，
+        	点标题栏左右两端同样可以出现，在主页面上可以设置报警的手机，菜单中设置精度和定位 点，
+        	设置定位点时，会出现百度地图界面，中央的圆点就是您所在的位置，根据情况，可以设置多个定位点
+        	（需要联网，在地图中长按，就会出现对话框），
+        	在定位点为中心，已您设置的精度为半径，就是活动的范围，如果超出这个范围，手机会自动像你的报警手机号
+        	发送短信，并附上详细地址（此服务需要点击界面中的开启服务，手动启动）。\n
+        	&#160;&#160;&#160;&#160;&#160;&#160;3。此软件只要开启，用任意的手机向安装软件的手机发送“weizhi”指令，
+        	该手机就会回复一条包含你详细位置信息的短息，您可以随时查看动态（此服务不需要手动开启，软件运行后自动开启）。\n
+        	&#160;&#160;&#160;&#160;&#160;&#160;4。菜单详情：用户帮助，就是用户帮助文档。设置定点，就是设置定点活动范围。
+        	设置精度，以定点为中心，精度为半径的圆就是合法的活动范围。设置密码，就是设置发送短信获取地理详细信息的指令。
+        	查看数据，可以看10天内定位记录详情，一分钟一条记录，时间倒叙排序。设置向导，就是引导您设置相关的内容，设置完成后
+        	就直接可以使用软件了。
+        </string>
+    <string name="set_phone_view_tv">请输入你的报警手机号码(超出范围后会向报警电话发送消息，包含着详细地理位置)：</string>
+    <string name="set_miwen_view_et">请输入你的密码短信（该密码用于短信获取监控人当前的位置，向监控人手机发送此密码
+        	就会回复详细的地理信息）：</string>
+    <string name="set_jingdu_view_tv">请输入你的报警的精度范围（以定点为中心，精度为半径是授权范围，
+        	只要目标超出这个范围，就会向报警电话发送短信提醒。单位：米）：</string>
+    <string name="quxiao">取消</string>
+    <string name="xiayibu">下一步</string>
+    <string name="xiayibu2">下一步(定点)</string>
+    <string name="seclect_map_tv">该定点的详细位置(圆点是您当前位置，图钉代表的就是定点的位置):</string>
+    <string name="show_weizhi_tv">十天内定位信息</string>
+    <string name="map_view_edittext">请输入你路线的名称</string>
+
+</resources>
