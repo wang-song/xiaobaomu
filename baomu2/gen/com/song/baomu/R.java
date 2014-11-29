@@ -1083,20 +1083,16 @@ containing a value of this type.
         public static final int button_style=0x7f020059;
         public static final int frame=0x7f02005a;
         public static final int gesture=0x7f02005b;
-        public static final int guide_help1=0x7f02005c;
-        public static final int guide_help2=0x7f02005d;
-        public static final int guide_help3=0x7f02005e;
-        public static final int guide_help4=0x7f02005f;
-        public static final int ic_launcher=0x7f020060;
-        public static final int icon_calendar=0x7f020061;
-        public static final int icon_home=0x7f020062;
-        public static final int icon_profile=0x7f020063;
-        public static final int icon_settings=0x7f020064;
-        public static final int menu_background=0x7f020065;
-        public static final int shadow=0x7f020066;
-        public static final int title_bar_menu=0x7f020067;
-        public static final int title_bar_menu_on=0x7f020068;
-        public static final int tuding=0x7f020069;
+        public static final int ic_launcher=0x7f02005c;
+        public static final int icon_calendar=0x7f02005d;
+        public static final int icon_home=0x7f02005e;
+        public static final int icon_profile=0x7f02005f;
+        public static final int icon_settings=0x7f020060;
+        public static final int menu_background=0x7f020061;
+        public static final int shadow=0x7f020062;
+        public static final int title_bar_menu=0x7f020063;
+        public static final int title_bar_menu_on=0x7f020064;
+        public static final int tuding=0x7f020065;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
