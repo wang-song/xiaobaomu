@@ -149,8 +149,8 @@ public class MoreMainActivity extends Activity {
 
 	protected void onResume() {
 
+		
 		list = dingdianserver.findTitle();
-
 		if (list.size() == 0) {
 			Toast.makeText(MoreMainActivity.this, "您还没有设置路线，请点击“设置路线”进行路线的设置",
 					1).show();

@@ -34,7 +34,7 @@ public class MyBaomuService extends Service {
 	private String sharedname_dian = "myconfig_dian";
 	private String sharedname_jingdu = "myconfig_jingdu";
 	private String sharedname_phone = "myconfig_phone";
-	//把定位点信息 每隔10秒写入文件中
+	// 把定位点信息 每隔10秒写入文件中
 	private List<Map<String, String>> sharedperence = null;
 	private String shareurl = "";
 
@@ -57,11 +57,11 @@ public class MyBaomuService extends Service {
 
 	double juli;
 	double julimin = 0;
-	
+
 	// 定位信息
 	double mylatitude;
 	double mylongitude;
-	
+
 	// 遍历的信息
 	double bianlilatitude;
 	double bianlilongitude;
@@ -72,6 +72,28 @@ public class MyBaomuService extends Service {
 	@Override
 	public IBinder onBind(Intent intent) {
 
+		
+		
+		// 获取经度，默认为50
+		SharedPreferences myshared_jingdu = getSharedPreferences(
+				sharedname_jingdu, Context.MODE_WORLD_READABLE);
+		jingdu = myshared_jingdu.getInt("jingdu", 0);
+
+		SharedPreferences myshared = getSharedPreferences(sharedname_phone,
+				Context.MODE_WORLD_READABLE);
+		phone = myshared.getString("phone", "");
+
+		if (jingdu == 0) {
+			jingdu = 50;
+			Toast.makeText(MyBaomuService.this,
+					"你没有设置精度，已经默认为 50 米，需要设置，请关闭服务后设置。你设置的报警电话为 " + phone, 1)
+					.show();
+		}
+		sharedperence = getDate();
+
+		
+		
+		
 		// 计算距离新线程
 		new Thread(new Runnable() {
 			public void run() {
@@ -83,12 +105,13 @@ public class MyBaomuService extends Service {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				
+
 					// 绑定服务时，把定位信息获取到
 					listaddress = ((MyApplication) getApplicationContext())
 							.getList();
 					mylatitude = Double.parseDouble(listaddress.get("latitude"));
-					mylongitude = Double.parseDouble(listaddress.get("longitude"));
+					mylongitude = Double.parseDouble(listaddress
+							.get("longitude"));
 					dingwei = new LatLng(mylatitude, mylongitude);
 
 					// 生成定位地址的分享URL
@@ -118,7 +141,7 @@ public class MyBaomuService extends Service {
 					if (julimin > jingdu) {
 						flag = true;
 					}
-					
+
 					// 测试
 					System.out.println("服务中新线程正在运行" + flag + julimin);
 				}
@@ -138,21 +161,26 @@ public class MyBaomuService extends Service {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 					// 如果超出范围则报警
 					if (flag) {
 						// 报警处理
-						String content ="链接查看当前位置"+shareurl+" 你监管对象现已经超出设定范围，在经纬度为：("+mylongitude+","+mylatitude+")";
-					
+						String content = "查看位置" + shareurl
+								+ " 对象超出范围,在经纬(" + mylongitude + ","
+								+ mylatitude + ")";
+
 						SmsManager smsmanger = SmsManager.getDefault();
 						List<String> texts = smsmanger.divideMessage(content);
-						for(String text:texts){
-							smsmanger.sendTextMessage(phone, null, text, null, null);
+						for (String text : texts) {
+							smsmanger.sendTextMessage(phone, null, text, null,
+									null);
 						}
-//						smsmanger.sendTextMessage(phone, null, content, null, null);
-						
+//						Toast.makeText(MyBaomuService.this, content, 1);
+						// smsmanger.sendTextMessage(phone, null, content, null,
+						// null);
+
 						chaochuxianchengflag = false;
-						System.out.println(content+chaochuxianchengflag);
+						System.out.println(content + chaochuxianchengflag);
 
 					}
 				}
@@ -160,7 +188,6 @@ public class MyBaomuService extends Service {
 			}
 
 		}).start();
-		
 
 		return mybinder;
 	}
@@ -180,6 +207,16 @@ public class MyBaomuService extends Service {
 
 	}
 
+	
+	
+	
+	@Override
+	public void onRebind(Intent intent) {
+		super.onRebind(intent);
+		sharedperence = getDate();
+		
+	}
+
 	/**
 	 * 服务创建是开始定位，并计算处理
 	 */
@@ -197,32 +234,16 @@ public class MyBaomuService extends Service {
 
 		mShareUrlSearch = ShareUrlSearch.newInstance();
 		mShareUrlSearch.setOnGetShareUrlResultListener(sharelistener);
-
-		// 获取经度，默认为50
-		SharedPreferences myshared_jingdu = getSharedPreferences(
-				sharedname_jingdu, Context.MODE_WORLD_READABLE);
-		jingdu = myshared_jingdu.getInt("jingdu", 0);
-
-		SharedPreferences myshared = getSharedPreferences(sharedname_phone,
-				Context.MODE_WORLD_READABLE);
-		phone = myshared.getString("phone", "");
-
-		if (jingdu == 0) {
-			jingdu = 50;
-			Toast.makeText(MyBaomuService.this,
-					"你没有设置精度，已经默认为 50 米，需要设置，请关闭服务后设置。你设置的报警电话为 " + phone, 1)
-					.show();
-		}
+		
 		sharedperence = getDate();
-
+		
 	}
-
-
 
 	/**
 	 * 把SharedPreferences中的数据转化成list集合
 	 */
 	public List<Map<String, String>> getDate() {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 		List<Map<String, String>> listdata = new ArrayList<Map<String, String>>();
 
@@ -256,7 +277,7 @@ public class MyBaomuService extends Service {
 
 		@Override
 		public void onGetPoiDetailShareUrlResult(ShareUrlResult result) {
-			
+
 		}
 
 	}

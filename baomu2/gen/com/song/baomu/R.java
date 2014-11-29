@@ -1376,6 +1376,7 @@ containing a value of this type.
         public static final int map_view_qingchu=0x7f0a001a;
         public static final int map_view_queding=0x7f0a0019;
         public static final int map_view_textview=0x7f0a0018;
+        public static final int mian_edit_phone=0x7f0a002f;
         public static final int more_mian_cakan=0x7f0a001f;
         public static final int more_mian_qingchu=0x7f0a001e;
         public static final int more_mian_queding=0x7f0a001d;

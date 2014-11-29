@@ -59,6 +59,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button main_caidan_right;
 
 	private ListView main_listview;
+	
+	private boolean mIsBind = false;
 
 	String edit_phone = "";
 
@@ -235,10 +237,15 @@ public class MainActivity extends Activity implements OnClickListener {
 							.setPositiveButton("确定", null).show();
 
 				} else {
+					if(mIsBind){
+						unbindService(conn);
+						mIsBind =  false;
+					}
 					// 绑定服务
 					Intent intentservice = new Intent(MainActivity.this,
 							MyBaomuService.class);
 					bindService(intentservice, conn, BIND_AUTO_CREATE);
+					mIsBind =  true;
 					Toast.makeText(MainActivity.this,
 							"您设置的报警电话为 " + phone + " 精度为 " + jingdu1, 1).show();
 
@@ -249,7 +256,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
 				// 解除服务的绑定
 				unbindService(conn);
-				Toast.makeText(MainActivity.this, "服务已关闭。", 1).show();
+				mIsBind =  false;
+				Toast.makeText(MainActivity.this, "服务已关闭!", 1).show();
 				break;
 
 			case R.id.header_left_btn:

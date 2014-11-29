@@ -86,6 +86,7 @@
         <activity android:name=".MoreDianActivity" />
         <activity android:name=".HelpActivity" />
         <activity android:name=".MapSecletActivity" />
+        <activity android:name=".MapActivity" />
         <activity android:name=".OffLineMap" />
         <activity android:name="com.song.shezhiactivity.SetPhoneActivity" />
         <activity android:name="com.song.shezhiactivity.SetJingduActivity" />

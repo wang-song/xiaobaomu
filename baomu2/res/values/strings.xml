@@ -52,5 +52,6 @@
     <string name="seclect_map_tv">该定点的详细位置(圆点是您当前位置，图钉代表的就是定点的位置):</string>
     <string name="show_weizhi_tv">十天内定位信息</string>
     <string name="map_view_edittext">请输入你路线的名称</string>
+    <string name="mian_edit_phone">报警手机号</string>
 
 </resources>

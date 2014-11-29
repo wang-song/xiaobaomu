@@ -474,6 +474,7 @@ int string map_view_edittext 0x7f0a002e
 int string map_view_qingchu 0x7f0a001a
 int string map_view_queding 0x7f0a0019
 int string map_view_textview 0x7f0a0018
+int string mian_edit_phone 0x7f0a002f
 int string more_mian_cakan 0x7f0a001f
 int string more_mian_qingchu 0x7f0a001e
 int string more_mian_queding 0x7f0a001d

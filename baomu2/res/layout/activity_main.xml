@@ -31,22 +31,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_phone"
-                android:textSize="17sp" />
-
             <EditText
                 android:id="@+id/main_edit_phone"
-                android:layout_width="160dp"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/mian_edit_phone"   
                 android:inputType="phone" />
 
             <Button
                 android:id="@+id/main_set_phone"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+               	android:background="#87cefa"
                 android:layout_marginRight="0dp"
                 android:text="@string/main_set_phone"
                 android:textSize="15sp" />
@@ -71,6 +67,8 @@
                 android:id="@+id/main_open_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="2sp"
+                android:background="#87cefa"
                 android:layout_weight="1"
                 android:text="@string/main_opne_service" />
 
@@ -78,6 +76,8 @@
                 android:id="@+id/main_close_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="2sp"
+                android:background="#87cefa"
                 android:layout_weight="1"
                 android:text="@string/main_close_service" />
         </LinearLayout>

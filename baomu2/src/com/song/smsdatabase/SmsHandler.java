@@ -2,6 +2,8 @@ package com.song.smsdatabase;
 
 import java.util.List;
 
+import com.song.baomu.MyBaomuService;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,6 +11,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.telephony.SmsManager;
+import android.widget.Toast;
 
 /**
  * @author 短信的处理
@@ -35,6 +38,7 @@ public class SmsHandler extends Handler {
 			
 			System.out.println(smsInfo.smsBody);
 			String msgTxt = smsInfo.smsBody;
+			System.out.println(miwen);
 
 			if (msgTxt.startsWith(miwen)) {
 
@@ -46,17 +50,18 @@ public class SmsHandler extends Handler {
 
 				if (latitude.length() != 0 && longitude.length() != 0) {
 
-					String content = "他的位置百度经纬度： (" + longitude + ","
-							+ latitude +"),点击获得详细位置"+shareurl;
+					String content = "点击获得详细位置"+shareurl+" 他的位置百度经纬度： (" + longitude + ","
+							+ latitude +")";
 
 					SmsManager smsmanger = SmsManager.getDefault();
 					List<String> texts = smsmanger.divideMessage(content);
 					for (String text : texts) {
 						smsmanger.sendTextMessage(smsInfo.smsAddress, null,
 								text, null, null);
-					}
-					System.out.println(content);
+						System.out.println(text);
 					
+					}
+//					Toast.makeText(mcontext, content, 1);
 					Uri mUri = Uri.parse("content://sms/");
 					mcontext.getContentResolver().delete(mUri, "_id=?",
 							new String[] { smsInfo._id });
