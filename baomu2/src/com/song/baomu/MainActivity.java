@@ -134,7 +134,21 @@ public class MainActivity extends Activity implements OnClickListener {
 		setUpMenu();
 		
 		list = getDate();
+		
+		
+		// 先判断手机号设置了没
+		SharedPreferences myshared = getSharedPreferences(
+				sharedname_phone, Context.MODE_WORLD_READABLE);
+		String phone = myshared.getString("phone", "");
 
+		if (phone.equals("") || phone.length() == 0) {
+			
+		}else{
+			main_edit_phone.setText(phone);
+		}
+
+		
+		
 		// listview 点击事件
 		main_listview.setOnItemClickListener(new OnItemClickListener() {
 
